@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../../base/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="../../../base/css/global.css">
+    <script src="../../../base/js/jquery-3.3.1.min.js"></script>
+    <script src="../../../base/plugins/layui/layui.js"></script>
+    <script src="../../../base/js/global.js"></script>
+    <script src="../../../base/js/requestUtil.js"></script>
+    <script src="../../../base/js/baseUtil.js"></script>
+    <script src="js/estateList.js"></script>
+    <title>房源管理</title>
+</head>
+<body>
+<div class="layui-form">
+    <div class="layui-form-item" id="formSearch">
+        <div class="layui-inline"><a id="btnAdd" class="layui-btn layui-btn-normal permission_add ">新增房源信息</a><a
+                class="layui-btn layui-btn-small layui-btn-danger permission_delete " id="btnDelete">批量删除</a>
+            <!--<a class="layui-btn layui-btn-small permission_imp " id="btnImp">导入</a><a id="btnExp" class="layui-btn layui-btn-small permission_exp ">导出</a>-->
+        </div>
+        <label class="layui-inline">小区名称:</label>
+        <div class="layui-inline">
+            <input type="text" name="e.estate_name" class="layui-input search" placeholder="请输入小区名称"></div>
+        <label class="layui-inline">楼号:</label>
+        <div class="layui-inline">
+            <input type="text" name="e.estate_structure" class="layui-input search" placeholder="请输入房屋格局"></div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-normal" id="btnSearch">搜索</a>
+            <!--<a class="layui-btn layui-btn-warm" id="btnAdvancedSearch">高级查询</a></div>-->
+        <!--<a class="layui-btn layui-btn-small" id="btnAdvancedSearch">高级查询</a>-->
+        </div>
+    </div>
+</div>
+<div class="list_table">
+    <table class="layui-table layui-form" id="estateTable">
+        <thead>
+        <tr>
+            <th><input type="checkbox" class="inpDel"></th>
+            <th>小区名称</th>
+            <th>楼号</th>
+            <th>单元号</th>
+            <th>楼层</th>
+            <th>房间号</th>
+            <th>房屋格局</th>
+            <th>房屋价格</th>
+            <th>销售状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="checkbox" class="inpDel"></td>
+            <td>锦程公寓</td>
+            <td>07</td>
+            <td>08</td>
+            <td>09</td>
+            <td>810</td>
+            <td>三室一厅</td>
+            <td>88888元/m²</td>
+            <td>
+                <input type="checkbox" name="close" lay-skin="switch" lay-text="在售|已售">
+            </td>
+            <td>
+                <div class="layui-table-cell laytable-cell-1-0-9">
+                    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i
+                            class="layui-icon layui-icon-edit" id="#btnEdit"></i>编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i
+                            class="layui-icon layui-icon-delete"></i>删除</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="10">
+                <p id="printPage" class="layui-box layui-laypage layui-laypage-default">
+                    <!--<span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>
+                    <a href="">2</a>
+                    <a href="">3</a>
+                    <a href="">...</a>
+                    <a href="">10</a>-->
+                </p>
+            </td>
+        </tr>
+
+        </tfoot>
+    </table>
+</div>
+</body>
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+    });
+</script>
+</html>

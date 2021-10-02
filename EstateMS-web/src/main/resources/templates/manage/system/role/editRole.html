@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑角色</title>
+    <link href="../../../img/hours.ico" rel="icon" type="image/x-icon">
+    <script src="../../../base/js/jquery-3.3.1.min.js" type="application/javascript"></script>
+    <script src="../../../base/js/baseUtil.js" type="application/javascript"></script>
+    <script src="../../../base/js/requestUtil.js"></script>
+    <script src="../../../base/js/global.js" type="application/javascript"></script>
+    <script src="js/roleEdit.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="../../../base/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet"  href="../../../base/css/global.css">
+    <script src="../../../base/plugins/layui/layui.js" type="application/javascript"></script>
+    <style>
+        .rolePermission_Group dl{
+            clear: both;
+        }
+        /*.rolePermissionGroup dl dt{*/
+        /*float: left;*/
+        /*}*/
+        .rolePermission_Group dl dd, .rolePermission_Group dl dt{
+            float: left;
+        }
+    </style>
+
+</head>
+<body>
+
+<form class="layui-form" id="form_submit">
+    <div class="site-title">
+    <fieldset>
+        <legend>编辑角色信息</legend>
+        <input type="hidden" name="role.version" id="version_role_submit">
+        <input type="hidden" name="role.role_id" id="role_id_role_submit">
+        <div class="Editrole_form_item layui-form-item">
+           <label class="layui-form-label">角色名称：</label>
+               <div class="layui-input-block">
+                  <input id="name-role-submit" name="role.name" type="text" placeholder="请输入角色名称" class="layui-input"></div>
+         </div>
+
+         <div class="Editrole_form_item layui-form-item">
+             <label class="layui-form-label">角色描述：</label>
+            <div class="layui-input-block">
+                <textarea id="memo-role-submit" name="role.memo" placeholder="请输入角色描述" class="layui-textarea"></textarea>
+             </div>
+       </div>
+
+       <div class="Editrole_form_item layui-form-item rolePermission_Group" id="rolePermissionGroup">
+           <div class="layui-input-block">
+           <dl>
+               <dt><input type="checkbox" title="角色管理" class="r_203"></dt>
+               <dd><input type="checkbox"  title="查询" class="r_203"></dd>
+               <dd><input type="checkbox" title="新增" class="r_203"></dd>
+               <dd><input type="checkbox"  title="修改" class="r_203"></dd>
+               <dd><input type="checkbox" title="删除" class="r_203"></dd>
+           </dl>
+           </div>
+           <div class="layui-input-block">
+           <dl>
+               <dt><input type="checkbox"  title="用户管理" class="r_204"></dt>
+               <dd><input type="checkbox"  title="查询"  class="r_204"></dd>
+               <dd><input type="checkbox"  title="新增"  class="r_204"></dd>
+               <dd><input type="checkbox"  title="修改"  class="r_204"></dd>
+               <dd><input type="checkbox"  title="删除"  class="r_204"></dd>
+               <dd><input type="checkbox"  title="导入"  class="r_204"></dd>
+               <dd><input type="checkbox"  title="导出"  class="r_204"></dd>
+           </dl>
+           </div>
+
+           <div class="layui-input-block">
+           <dl>
+               <dt><input type="checkbox" title="操作日志" class="r_103"></dt>
+               <dd><input type="checkbox"  title="查询" class="r_103"></dd>
+           </dl>
+           </div>
+
+           <div class="layui-input-block">
+           <dl>
+               <dt><input type="checkbox" title="登录日志" class="r_102"></dt>
+               <dd><input type="checkbox"  title="查询" class="r_102"></dd>
+           </dl>
+           </div>
+       </div>
+
+       <div class="roleEdit_buttin_group  layui-input-item">
+       <div class="layui-input-block">
+           <button class="layui-btn layui-btn-normal btn_update_permission_update" type="button" id="btnEdit">编辑</button>
+           <button class="layui-btn layui-btn-primary btn-cancel hidden"  type="button" id="btnCancel">取消</button>
+           <button class="layui-btn  btn-submit_update hidden"  type="button" id="btnSubmitUpdate">修改</button>
+           <button class="layui-btn layui-btn-danger btn_close" type="button" id="btnClose">关闭</button>
+           </div>
+       </div>
+
+   </fieldset>
+   </div>
+</form>
+
+</body>
+<script>
+   layui.use('form', function(){
+       var form = layui.form;
+
+   });
+</script>
+</html>

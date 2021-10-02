@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../../../base/js/jquery-3.3.1.min.js"></script>
+    <script src="../../../base/plugins/layui/layui.js"></script>
+    <script src="../../../base/js/uploadPreview.js"></script>
+    <script src="../../../base/js/global.js"></script>
+    <script src="../../../base/js/requestUtil.js"></script>
+    <script src="../../../base/js/baseUtil.js"></script>
+    <script src="js/estateEdit.js"></script>
+    <link rel="stylesheet"  href="../../../base/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="../../../base/css/global.css">
+
+    <title>编辑房源信息</title>
+
+
+</head>
+<body>
+<div class="layui-card-header">编辑房源信息</div>
+<div class="layui-card-body" pad15="">
+    <div class="layui-form" lay-filter="">
+    </div>
+<form class="layui-form" id="form_submit">
+    <input type="hidden" name="estate.estate_id" id="id-estate-submit">
+    <!--<input type="hidden" name="developer.developer_id" id="id-developer-submit">-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">房屋图片：</label>
+        <div class="layui-input-block" id="imgGroup">
+            <img src="../../../img/avatar.jpg" id="imgPreview" height="100px" width="100px"/>
+            <input  placeholder="请选择房屋图片" name="baseModel.tempMFile" type="file" id="tempMFile">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">小区名称：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" placeholder="请输入小区名称" type="text" name="estate.estate_name" id="name-estate-submit">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">楼号：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" placeholder="请输入楼号" type="text" name="estate.estate_buildingNum" id="buildingNum-estate-submit">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">单元号：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" placeholder="请输入单元号" type="text" name="estate.estate_unitNum" id="unitNum-estate-submit">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">楼层：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" placeholder="请输入楼层" type="text" name="estate.estate_floorNum" id="floorNum-estate-submit">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房间号：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" placeholder="请输入房间号" type="text" name="estate.estate_roomNum" id="roomNum-estate-submit">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房屋格局：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" name="estate.estate_structure" placeholder="请输入房屋格局" type="text" id="structure-estate-submit">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房屋面积：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" name="estate.estate_area" placeholder="请输入房屋面积" type="text" id="area-estate-submit">m²
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房屋类型：</label>
+        <div class="layui-input-block" >
+            <select name="estate.estate_houseType_id" id="houseTypeGroup">
+                <option value="">请选择</option>
+                <option value="1">单元式住宅</option>
+                <option value="2">公寓式住宅</option>
+                <option value="3">复式住宅</option>
+                <option value="4">跃层式住宅</option>
+                <option value="5">别墅</option>
+                <option value="6">小户型住宅</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房屋朝向：</label>
+        <div class="layui-input-block" >
+            <select name="estate.estate_viewId" id="viewTypeGroup">
+                <option value="">请选择</option>
+                <option value="1">朝街房</option>
+                <option value="2">背街房</option>
+                <option value="3">城景房</option>
+                <option value="4">海景房</option>
+                <option value="5">园景房</option>
+                <option value="6">湖景房</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">价格：</label>
+        <div class="layui-input-block">
+            ￥<input class="layui-input" name="estate.estate_price" placeholder="请输入房屋价格" type="text" id="price-estate-submit">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">开发商：</label>
+        <div class="layui-input-block" id="developerNameGroup">
+            <input type="checkbox" title="发发发">
+            <input type="checkbox" title="发发发">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal btn_update_role_update" type="button" id="btnEdit">编辑</button>
+            <button class="layui-btn layui-btn-primary btn-cancel hidden"  type="button" id="btnCancel">取消</button>
+            <button class="layui-btn  btn-submit_update hidden"  type="button" id="btnSubmitUpdate">修改</button>
+            <button class="layui-btn layui-btn-danger btn_close" type="button" id="btnClose">关闭</button>
+        </div>
+    </div>
+</form>
+</div>
+</body>
+<script>
+    layui.use('form', function() {
+        var form = layui.form;
+        form.render();//刷新select选择框渲染
+    });
+</script>
+</html>

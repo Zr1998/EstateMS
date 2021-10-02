@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>销售信息</title>
+    <script src="../../../base/js/jquery-3.3.1.min.js"></script>
+    <script src="../../../base/plugins/layui/layui.js"></script>
+    <script src="../../../base/js/requestUtil.js"></script>
+    <script src="../../../base/js/baseUtil.js"></script>
+    <script src="../../../base/js/global.js"></script>
+    <script src="js/saleList.js"></script>
+    <link rel="stylesheet" href="../../../base/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="../../../base/css/global.css">
+
+
+</head>
+<body>
+<div class="body">
+    <div class="layui-form-item" id="formSearch">
+        <label class="layui-inline">房产销售信息:</label>
+        <div class="layui-inline">
+            <input type="text" class="layui-input search" name="su.user_name" placeholder="请输入您要搜索的内容"></div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-small" id="btnSearch">搜索</a>
+    </div>
+</div>
+<div class="list_table">
+    <table class="layui-table" id="myTable">
+        <thead>
+        <tr style=" background-color: #59D05D; color: white">
+            <!--<th><input type="checkbox" class="inpDel"></th>-->
+            <th>购房人</th>
+            <th>购房数量</th>
+            <th>开发商名</th>
+            <th>购房时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <!--<td><input type="checkbox" class="inpDel"></td>-->
+            <td>hahaha</td>
+            <td>哈哈哈</td>
+            <td>11111</td>
+            <td>1111</td>
+            <td>
+                <div class="layui-table-cell laytable-cell-1-0-9">
+                    <a href="viewSalesInfo.html" class="layui-btn layui-btn-xs layui-btn-normal ">查看</a>
+                    <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i-->
+                            <!--class="layui-icon layui-icon-delete"></i>删除</a>-->
+                </div>
+            </td>
+        </tr>
+        </tbody>
+
+        <tfoot>
+        <tr>
+            <td colspan="5">
+                <p id="printPage" class="layui-box layui-laypage layui-laypage-default">
+                    <!--<span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>
+                    <a href="">2</a>
+                    <a href="">3</a>
+                    <a href="">...</a>
+                    <a href="">10</a>-->
+                </p>
+            </td>
+        </tr>
+
+        </tfoot>
+    </table>
+</div>
+</div>
+</body>
+
+</html>

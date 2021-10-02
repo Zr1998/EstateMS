@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hnwlxy.zr.EstateMS.biz.mapper.FileLogMapper">
+    <insert id="insertFileLog" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.FileLog" useGeneratedKeys="true" keyProperty="file_log_id">
+        insert into t_s_filelog
+        (file_name,save_path,file_rename,file_Size,file_type,file_Length,uploader,upload_time,is_deleted,message,state)
+        values (#{file_name},#{save_path},#{file_rename},#{file_Size},#{file_type},#{file_Length},#{uploader},#{upload_time},0,#{message},#{state})
+    </insert>
+
+    <update id="removeFileLogByUserIds" parameterType="String">
+        update t_s_filelog set is_deleted=1 where file_log_id in
+        (
+        select user_head_url from t_s_user where user_id in(${userIds})
+        )
+    </update>
+
+    <update id="removeFileLogByEstateIds" parameterType="String">
+        update t_s_filelog set is_deleted=1 where file_log_id in
+        (
+        select estate_photo from t_s_estate where estate_id in(${estateIds})
+        )
+    </update>
+</mapper>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link href="../../../img/hours.ico" rel="icon" type="image/x-icon">
+    <script src="../../../base/js/jquery-3.3.1.min.js" type="application/javascript"></script>
+    <script src="../../../base/js/baseUtil.js"></script>
+    <script src="../../../base/js/global.js" type="application/javascript"></script>
+    <script src="../../../base/js/requestUtil.js"></script>
+    <script src="js/userList.js" type="application/javascript"></script>
+    <script src="../../../base/plugins/layui/layui.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="../../../base/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="../../../base/css/global.css">
+    <link rel="stylesheet" href="css/userList.css">
+    <script>
+        //Demo
+        layui.use('form', function(){
+            var form = layui.form;
+        });
+    </script>
+
+
+</head>
+<body>
+
+<div class="body">
+    <form class="layui-form">
+        <div class="buttin_group layui-inline">
+            <a class="layui-btn layui-btn-normal permission_add hidden_per" id="btnAdd">新增用户</a>　
+            <a class="layui-btn layui-btn-danger permission_delete hidden_per" id="btnDelmore">批量删除</a>
+            <a class="layui-btn layui-btn-warm permission_imp hidden_per" href="../../../files/xlsImportTemplate/UserImp.xls"> 下载导入模板</a>
+            <a class="layui-btn layui-btn-small permission_imp hidden_per" id="btnImp">导入</a>
+            <a class="layui-btn layui-btn-small permission_exp hidden_per" id="btnExp">导出</a>
+        </div>
+        <br/>
+        <div class="search_item_group layui-inline"  id="formSearch">
+            <label class="layui-form-label">账号：</label>
+            <div class="layui-input-inline">
+                <input class="layui-input search" name="su.user_account" type="text" placeholder="请输入搜索的用户账号">
+            </div><br/>
+           <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input class="layui-input search" name="su.user_name" type="text" placeholder="请输入搜索的用户姓名">
+            </div>
+            <div class="search_div">
+                <a class="layui-btn" id="btnSearch">搜索</a>
+                <div class="layui-inline" id="layerDemo">
+                    <a  data-method="notice" id="btnAdvancedSearch"  class="layui-btn layui-btn-small">高级查询</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <table  id="myTable" class="layui-table layui-form">
+        <thead>
+        <tr>
+            <th> <input type="checkbox" class="inpDel"> </th>
+            <th>账号</th>
+            <th>姓名</th>
+            <th>所属角色</th>
+            <th>邮箱</th>
+            <th>籍贯</th>
+            <th>出生日期</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td> <input type="checkbox"  class="inpDel"> </td>
+                <td>zhangsan</td>
+                <td>张三</td>
+                <td>湖南 长沙</td>
+                <td>1998-10-13</td>
+                <td>
+                    <form class="layui-form">
+                    <input lay-skin="switch" type="checkbox" />
+                    </form>
+                </td>
+                <td>
+                    <a class="layui-btn layui-btn-xs layui-btn-normal">编辑</a>
+                    <a class="layui-btn layui-btn-xs layui-btn-warm">重置密码</a>
+                    <a class="layui-btn layui-btn-xs layui-btn-danger">删除</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td> <input type="checkbox"  class="inpDel"> </td>
+                <td>zhangsan</td>
+                <td>张三</td>
+                <td>17777787802</td>
+                <td>湖南 长沙</td>
+                <td>1998-10-13</td>
+                <td>
+                    <form class="layui-form">
+                        <input lay-skin="switch" type="checkbox" />
+                    </form>
+                </td>
+                <td>
+                    <a class="layui-btn layui-btn-xs layui-btn-normal">编辑</a>
+                    <a class="layui-btn layui-btn-xs layui-btn-warm">重置密码</a>
+                    <a class="layui-btn layui-btn-xs layui-btn-danger">删除</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td> <input type="checkbox"  class="inpDel"> </td>
+                <td>zhangsan</td>
+                <td>张三</td>
+                <td>17777787802</td>
+                <td>湖南 长沙</td>
+                <td>1998-10-13</td>
+                <td>
+                    <form class="layui-form">
+                        <input lay-skin="switch" type="checkbox" />
+                    </form>
+                </td>
+                <td>
+                    <a class="layui-btn layui-btn-xs layui-btn-normal">编辑</a>
+                    <a class="layui-btn layui-btn-xs layui-btn-warm">重置密码</a>
+                    <a class="layui-btn layui-btn-xs layui-btn-danger">删除</a></td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="8">
+                    <p class="layui-box layui-laypage layui-laypage-default" id="printPage">
+                        <span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>
+                        <a href="">2</a>
+                        <a href="">3</a>
+                        <a href="">...</a>
+                        <a href="">10</a>
+                    </p>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+
+</body>
+
+</html>

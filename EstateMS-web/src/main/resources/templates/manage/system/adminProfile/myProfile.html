@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../../../base/js/jquery-3.3.1.min.js"></script>
+    <script src="../../../base/plugins/layui/layui.js"></script>
+    <script src="../../../base/js/uploadPreview.js"></script>
+    <script src="../../../base/js/requestUtil.js"></script>
+    <script src="../../../base/js/baseUtil.js"></script>
+    <script src="../../../base/js/global.js" type="application/javascript"></script>
+    <script src="js/myProfile.js"></script>
+    <link rel="stylesheet"  href="../../../base/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="../../../base/css/global.css">
+
+    <title>我的档案</title>
+
+
+</head>
+<body>
+<div class="layui-card-header">我的档案</div>
+<div class="layui-card-body" pad15="">
+    <div class="layui-form" lay-filter="">
+    </div>
+    <form class="layui-form" id="form_profile">
+        <input type="hidden" name="user.user_id" id="user_id_user_profile">
+        <input type="hidden" name="user.version" id="version_user_profile">
+        <div class="layui-form-item">
+            <label class="layui-form-label">头像</label>
+            <div class="layui-input-block" id="imgGroup">
+                <img id="imgPreview" src="../../../img/hours.ico" width="50px" height="50px">
+                <input  placeholder="请选择头像" type="file" name="baseModel.tempMFile" id="tempMFile">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input class="layui-input" placeholder="请输入账号" type="text" name="user.user_account" id="account_profile" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block">
+                <input class="layui-input" placeholder="请输入姓名" type="text" name="user.user_name" id="user_name_profile" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block" id="sexGroup">
+                <input name="user.gender" value="0" type="radio" title="男">
+                <input name="user.gender" value="1" type="radio" title="女">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">籍贯</label>
+            <div class="layui-input-block">
+                <input class="layui-input" placeholder="请输入籍贯" type="text" name="user.user_address" id="address_user_profile">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机</label>
+            <div class="layui-input-block">
+                <input class="layui-input" placeholder="请输入手机号码" type="text" name="user.user_phone" id="phone_user_profile">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+                <input class="layui-input" placeholder="请输入邮箱号" type="text" name="user.email" id="email_user_profile">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">出生日期</label>
+            <div class="layui-input-block">
+                <input class="layui-input" name="user.birthday" placeholder="请选择出生日期" type="text" id="birthday_user_profile">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属角色</label>
+            <div class="layui-input-block" id="roleNameGroup">
+                <input type="checkbox" title="超级管理员">
+                <input type="checkbox" title="管理员">
+                <input type="checkbox" title="普通用户">
+                </select>
+            </div>
+        </div>
+
+        <div class="myProFile_buttin_group layui-input-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal btn_update_role_update" type="button" id="btnEdit">编辑</button>
+                <button class="layui-btn layui-btn-primary btn-cancel hidden"  type="button" id="btnCancel">取消</button>
+                <button class="layui-btn  btn-submit_update hidden"  type="button" id="btnSubmitUpdate">修改</button>
+                <button class="layui-btn layui-btn-danger" type="button" id="btnClose">关闭</button>
+            </div>
+        </div>
+    </form></div>
+</body>
+<script>
+    layui.use(['form', 'laydate'], function () {
+        var laydate = layui.laydate;
+        //日期选择器
+        laydate.render({
+            elem: '#birthday_user_profile'
+        });
+    });
+</script>
+</html>

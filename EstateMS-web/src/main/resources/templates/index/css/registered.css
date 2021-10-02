@@ -1,0 +1,47 @@
+body {
+    background-image: url("../../img/水彩画的云朵.jpg");
+}
+
+.box{
+    width: 550px;
+    height: 600px;
+    margin: 20px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+}
+.registered_header{
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.registered_header .fl {
+    font-size: 30px;
+}
+
+.fl {
+    float: left;
+}
+
+.registered_header .fr {
+    float: right;
+    font-size: 18px;
+    line-height: 50px;
+}
+
+.fr {
+    float: right;
+}
+#login {
+    color: #eb7350;
+}
+.registered {
+    width: 540px;
+    margin: 0 auto;
+}
+.layui-input{
+    width: 350px;
+}
+.service a {
+    color: #4BB2FF;
+}

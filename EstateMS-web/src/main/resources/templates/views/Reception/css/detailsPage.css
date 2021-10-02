@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.hours-img {
+
+    padding: 57px 83px 20px 185px
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.body {
+    width: 100%;
+    height: 580px;
+    overflow: hidden;
+}
+
+tr {
+    height: 50px;
+    width: 50px;
+}
+
+.layui-tab {
+    margin-left: 85px;
+}
+.box {
+    width: 1200px;
+    height: 510px;
+    background: white;
+    margin: 60px  auto;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+.box2{
+    width: 1180px;
+    height: 120px;
+    margin: 0 auto;
+    background: white;
+    margin-bottom: 60px;
+    padding: 10px;
+}

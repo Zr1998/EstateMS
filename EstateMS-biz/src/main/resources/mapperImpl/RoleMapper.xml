@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hnwlxy.zr.EstateMS.biz.mapper.RoleMapper">
+    <resultMap id="mapRoleVo" type="com.hnwlxy.zr.EstateMS.common.vo.SysRoleVo">
+        <id property="role_id" column="role_id"></id>
+        <association property="role" javaType="com.hnwlxy.zr.EstateMS.common.pojo.Role">
+            <id property="role_id" column="role_id"></id>
+            <result property="name" column="name"></result>
+            <result property="memo" column="memo"></result>
+            <result property="create_user_name" column="create_user_name"></result>
+            <result property="create_time" column="create_time"></result>
+            <result property="update_user_name" column="update_user_name"></result>
+            <result property="update_time" column="update_time"></result>
+            <result property="version" column="version"></result>
+        </association>
+        <!-- 一对多映射 -->
+        <collection property="listRolePermission" ofType="com.hnwlxy.zr.EstateMS.common.pojo.RolePermission">
+            <id property="permission_id" column="permission_id"></id>
+            <result property="code" column="code"></result>
+            <result property="permission_value" column="permission_value"></result>
+        </collection>
+    </resultMap>
+
+    <select id="selectRole" parameterType="com.hnwlxy.zr.EstateMS.common.model.QueryParams" resultType="com.hnwlxy.zr.EstateMS.common.pojo.Role">
+        select * from t_s_role where is_deleted=0
+        <if test="where!='' and where!=null">
+            and ${where}
+        </if>
+        order by
+        <if test="order!=null and order!=''">
+            ${order}
+        </if>
+        convert(name using gbk) asc
+    </select>
+
+    <select id="countRoleByName" parameterType="String" resultType="Integer">
+        select count(*) from t_s_role where is_deleted=0 and `name`=#{name}
+    </select>
+
+    <select id="selectRoleByName" parameterType="String" resultType="com.hnwlxy.zr.EstateMS.common.pojo.Role">
+        select * from t_s_role where is_deleted=0 and `name`=#{name}
+    </select>
+
+    <insert id="insertRole" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.Role" useGeneratedKeys="true" keyProperty="role_id">
+        insert into t_s_role
+        (`name`, `create_user_id`, `create_user_name`, `create_time`,`is_deleted`, `memo`,`version`)
+        values
+        (#{name},#{create_user_id}, #{create_user_name}, now(),0, #{memo},0)
+    </insert>
+
+    <insert id="insertRolePermission" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.RolePermission" useGeneratedKeys="true">
+        insert into t_s_role_permission
+        (fk_role_id,code,permission_value,create_user_id,create_user_name,create_time)
+        values (#{fk_role_id},#{code},#{permission_value},#{create_user_id},#{create_user_name},now())
+    </insert>
+
+    <select id="selectRoleVoByPk" parameterType="int" resultMap="mapRoleVo">
+        select sr.*,srp.permission_id,srp.code,srp.permission_value from t_s_role sr
+        left join t_s_role_permission srp
+        on sr.role_id=srp.fk_role_id
+        where sr.is_deleted=0 and role_id=#{pk}
+    </select>
+
+    <update id="updateRoleVo" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.Role">
+        update t_s_role set
+        version=version+1
+        <if test="name!=null">
+            ,name=#{name}
+        </if>
+        <if test="memo!=null">
+            ,memo=#{memo}
+        </if>
+        ,update_user_id=#{update_user_id},update_user_name=#{create_user_name},update_time=now()
+        where role_id=#{role_id} and version=#{version}
+    </update>
+
+    <delete id="deleteRolePermission" parameterType="String">
+        delete from t_s_role_permission
+        where fk_role_id in (${fkRoleIds})
+    </delete>
+
+    <update id="removeRoleInPk" parameterType="String">
+        update t_s_role set is_deleted=1
+        where role_id in(${roleIds}) and is_deleted=0
+    </update>
+
+    <select id="selectRoleName" resultType="com.hnwlxy.zr.EstateMS.common.pojo.Role">
+        select name,role_id from t_s_role where is_deleted=0
+        order by convert (name using gbk) asc
+    </select>
+
+    <delete id="deleteUserRoleInRoleIds" parameterType="String">
+        delete from t_s_user_role
+        where fk_role_id in (${roleIds})
+    </delete>
+
+    <select id="selectRolePermissionByUserId" parameterType="int" resultType="com.hnwlxy.zr.EstateMS.common.pojo.RolePermission">
+        select tsrp.code,tsrp.permission_value,tsrp.permission_id from t_s_role_permission tsrp
+         join
+         t_s_user_role tsur on tsur.fk_role_id=tsrp.fk_role_id
+         where tsur.fk_user_id=#{userId}
+    </select>
+</mapper>

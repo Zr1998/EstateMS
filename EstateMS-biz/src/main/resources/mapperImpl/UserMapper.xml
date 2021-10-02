@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hnwlxy.zr.EstateMS.biz.mapper.UserMapper">
+    <resultMap id="mapUserVo" type="com.hnwlxy.zr.EstateMS.common.vo.SysUserVo">
+        <id property="user_id" column="user_id"></id>
+        <result property="role_names" column="role_names"></result>
+        <result property="role_id" column="fk_role_id"></result>
+        <association property="user" javaType="com.hnwlxy.zr.EstateMS.common.pojo.User">
+            <id property="user_id" column="user_id"></id>
+            <result property="user_account" column="user_account"></result>
+            <result property="password" column="password"></result>
+            <result property="user_name" column="user_name"></result>
+            <result property="user_head_url" column="user_head_url"></result>
+            <result property="create_user_id" column="create_user_id"></result>
+            <result property="create_user_name" column="create_user_name"></result>
+            <result property="create_time" column="create_time"></result>
+            <result property="update_user_id" column="update_user_id"></result>
+            <result property="update_user_name" column="update_user_name"></result>
+            <result property="update_time" column="update_time"></result>
+            <result property="is_deleted" column="is_deleted"></result>
+            <result property="version" column="version"></result>
+            <result property="user_address" column="user_address"></result>
+            <result property="email" column="email"></result>
+            <result property="birthday" column="birthday"></result>
+            <result property="user_phone" column="user_phone"></result>
+            <result property="gender" column="gender"></result>
+            <result property="session_id" column="session_id"></result>
+        </association>
+        <association property="fileLog" javaType="com.hnwlxy.zr.EstateMS.common.pojo.FileLog">
+            <id property="file_log_id" column="file_log_id"></id>
+            <result property="save_path" column="save_path"></result>
+        </association>
+        <!-- 一对多映射 -->
+        <collection property="listUserRole" ofType="com.hnwlxy.zr.EstateMS.common.pojo.UserRole">
+            <id property="user_role_id" column="user_role_id"></id>
+            <result property="fk_user_id" column="fk_user_id"></result>
+            <result property="fk_role_id" column="fk_role_id"></result>
+        </collection>
+    </resultMap>
+
+    <select id="selectUserByAccount" resultMap="mapUserVo" parameterType="String">
+         select u.*,slf.file_log_id,slf.save_path,sur.fk_role_id from t_s_user u
+        left join t_s_filelog slf
+        on u.user_head_url=slf.file_log_id and slf.is_deleted=0
+        left join t_s_user_role sur
+        on sur.fk_user_id=u.user_id
+        where u.user_account=#{user_account} and u.is_deleted=0
+    </select>
+
+    <update id="updateBySessionId" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.User">
+         update t_s_user set
+          session_id=#{session_id}
+          where user_account=#{user_account}
+    </update>
+
+    <select id="selectUserVoByUserId" resultMap="mapUserVo" parameterType="int">
+       select u.*,slf.file_log_id,slf.save_path,sur.fk_role_id from t_s_user u
+        left join t_s_filelog slf
+        on u.user_head_url=slf.file_log_id and slf.is_deleted=0
+        left join t_s_user_role sur
+        on sur.fk_user_id=u.user_id
+        where u.user_id=#{user_id} and u.is_deleted=0
+    </select>
+
+    <insert id="insertUser" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.User" keyProperty="user_id" useGeneratedKeys="true">
+        insert into t_s_user
+        (user_account,password,user_name,user_head_url,create_user_id,create_user_name,create_time,is_deleted,version,user_address,email,birthday,user_phone,gender)
+        values
+        (#{user_account},#{password},#{user_name},#{user_head_url},#{create_user_id},#{create_user_name},now(),0,0,#{user_address},#{email},#{birthday},#{user_phone},#{gender})
+    </insert>
+
+    <!--用户注册添加用户角色关系-->
+    <insert id="insertUserRoleId" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.UserRole" keyProperty="user_role_id" useGeneratedKeys="true">
+        insert into t_s_user_role
+        (fk_user_id,fk_role_id)
+        values (#{fk_user_id},1)
+    </insert>
+
+    <!--添加用户角色关系-->
+    <insert id="insertUserRole" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.UserRole" keyProperty="user_role_id" useGeneratedKeys="true">
+        insert into t_s_user_role
+        (fk_user_id,fk_role_id)
+        values (#{fk_user_id},#{fk_role_id})
+    </insert>
+
+    <!--合并同一个用户id的角色名称-->
+    <sql id="selectRoleNames">
+        select fk_user_id,GROUP_CONCAT(sr.name SEPARATOR ',')as role_names from t_s_user_role sur
+        join t_s_role sr on sur.fk_role_id=sr.role_id and sr.is_deleted=0
+        GROUP BY fk_user_id
+    </sql>
+
+    <select id="selectUserVo" parameterType="com.hnwlxy.zr.EstateMS.common.model.QueryParams" resultMap="mapUserVo">
+        select su.*,trn.role_names from t_s_user su
+        left join (
+        <include refid="selectRoleNames"></include>
+        )trn on trn.fk_user_id=su.user_id
+        where su.is_deleted=0
+        <if test="where!=null and where!=''">
+            and ${where}
+        </if>
+        order by
+        <if test="order != null and order != ''">
+            ${order}
+        </if>
+        su.user_account asc
+    </select>
+
+    <update id="updateUserVo" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.User">
+        update t_s_user set
+        <if test="user_account != null and user_account!=''">
+            user_account = #{user_account},
+        </if>
+        <if test="password != null and password!=''">
+            password = #{password},
+        </if>
+        <if test="user_name != null and user_name!=''">
+            user_name = #{user_name},
+        </if>
+        <if test="birthday != null">
+            birthday = #{birthday},
+        </if>
+        <if test="user_address != null and user_address != ''">
+            user_address = #{user_address},
+        </if>
+        <if test="email != null and email != ''">
+            email = #{email},
+        </if>
+        <if test="user_head_url != null and user_head_url != ''">
+            user_head_url = #{user_head_url},
+        </if>
+        <if test="gender != null">
+            gender = #{gender},
+        </if>
+        <if test="user_phone != null and user_phone != ''">
+            user_phone = #{user_phone},
+        </if>
+        session_id=#{session_id},
+        version = #{version} + 1,
+        update_time = now(),
+        update_user_name = #{update_user_name},
+        update_user_id = #{update_user_id}
+        where user_id = #{user_id} and version = #{version}
+    </update>
+
+    <!--理论删除用户-->
+    <update id="removeUserInPk" parameterType="String">
+          update t_s_user set is_deleted=1
+        where user_id in(${userIds}) and is_deleted=0
+    </update>
+
+    <!--删除用户角色关系-->
+    <delete id="deleteRoleNames" parameterType="String">
+        delete from t_s_user_role
+        where fk_user_id in (${fkUserIds})
+    </delete>
+
+    <update id="updatePassword" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.User">
+         update t_s_user set
+      password=#{password},
+      update_time = now(),
+      update_user_name = #{update_user_name},
+      update_user_id = #{update_user_id}
+      where user_id=#{user_id}
+    </update>
+
+    <!--重置密码-->
+    <update id="resetPassword" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.User">
+      update t_s_user set
+      password=#{password},
+      update_time = now(),
+      update_user_name = #{update_user_name},
+      update_user_id = #{update_user_id}
+      where user_id=#{user_id}
+    </update>
+</mapper>

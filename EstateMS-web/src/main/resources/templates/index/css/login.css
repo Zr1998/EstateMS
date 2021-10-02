@@ -1,0 +1,70 @@
+*{
+    padding:0;
+    margin: 0;
+}
+body{
+    background-image: url("/img/水彩画的云朵.jpg");
+}
+.wrap{
+    width: 400px;
+    height: 301px;
+    margin:100px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+}
+img{
+    border-radius: 50%;
+}
+.login{
+    width:340px;
+    margin: 0 auto;
+}
+.login_header{
+    height: 50px;
+    margin-bottom:15px;
+}
+.login_header .fl{
+    font-size:30px;
+}
+.fl{
+    float: left;
+}
+.login_header .fr{
+    float: right;
+    font-size: 18px;
+    line-height: 50px;
+}
+.fr{
+    float: right;
+}
+.layui-input{
+    margin-bottom:15px;
+}
+.yanzhen .layui-input{
+    width: 60%;
+
+}
+.yanzhen{
+    margin-bottom:15px;
+}
+.login_foot{
+    height: 90px;
+}
+.verification{
+    width: 120px;
+    height: 40px;
+    background: #eb7350;
+    font-size:35px;
+    color:white;
+    text-align: center;
+}
+.yzm{
+    width: 300px;
+    height: 30px;
+    clear: both;
+}
+#registered{
+    color: #ff660c;
+}
+

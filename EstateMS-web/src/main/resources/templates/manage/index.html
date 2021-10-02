@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../img/hours.ico"/>
+    <link rel="stylesheet" type="text/css" href="../index/css/index.css">
+    <link rel="stylesheet" type="text/css" href="../base/plugins/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="../base/css/global.css">
+    <link rel="stylesheet" type="text/css" href="../base/plugins/layui/css/layui.css">
+    <script type="application/javascript" src="../base/js/jquery-3.3.1.min.js"></script>
+    <script type="application/javascript" src="../base/plugins/layui/layui.js"></script>
+    <script src="../base/js/requestUtil.js"></script>
+    <script type="application/javascript" src="../index/js/index.js"></script>
+    <script src="../base/js/baseUtil.js"></script>
+    <title>房产销售管理系统|首页</title>
+
+
+</head>
+<body>
+<div class="box">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header header header-demo " style="background-color: #6d93a2">
+            <div class="layui-logo " style="margin-left: 10px">房产销售管理系统</div>
+            <!--<div class="search">-->
+                <!--<input type="text" class="layui-input" id="" placeholder="请输入搜索内容">-->
+            <!--</div>-->
+            <ul class="layui-nav  layui-layout-right">
+                <li class="layui-nav-item" style="margin-right:25px">
+                    <!--<a href=""><i class="fa fa-envelope"></i><span class="layui-badge-dot"></span></a>-->
+                    <input type="hidden" name="color" value="" id="test-all-input">
+                    <div id="test-all"></div>
+                </li>
+
+                <li class="layui-nav-item">
+                    <img  id="session_user_url" src="//t.cn/RCzsdCq" class="layui-nav-img">
+                        欢迎您，<lable  id="session_user_name">张三</lable>！
+                    <dl class="layui-nav-child" id="navTopGroup">
+                        <dd><a href="javascript:;" id="btnLoginOut"><i class="fa fa-undo"></i>退出系统</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="main_left layui-side ">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav  layui-nav-tree site-demo-nav" id="navGroup" style="background-color: #6d93a2">
+                    <a class="nav_item hidden" id="nav_temp"><i></i>辅助菜单</a>
+                    <a class="hidden" id="tabClose_temp"><i></i>辅助关闭选项卡</a>
+                    <li class="layui-nav-item ">
+                        <a class=""><img id="session_user_head_url" src="//t.cn/RCzsdCq" class="layui-nav-img" width="50"
+                                                        height="50"><lable  id="Session_user_name">张三</lable></a>
+                        <dl class="layui-nav-child">
+                            <dd><a class="nav_item" data-url="system/adminProfile/myProfile.html" data-id="nav_myProfile"><i
+                                    class="fa fa-book"></i> 我的档案</a></dd>
+                            <dd><a class="nav_item" data-url="system/adminProfile/changePassword.html" data-id="nav_changePassword"><i
+                                    class=" fa fa-edit"></i> 修改密码</a></dd>
+                        </dl>
+                    </li>
+
+                        <li class="layui-nav-item"><a class="nav_item" data-url="homepage.html" data-id="nav_1"><i
+                                class="fa fa-home"></i> 首页</a></li>
+                    <!--<li class="layui-nav-item" class="layui-nav-itemed"><a><i class="fa fa-cog"></i>系统管理</a>-->
+                        <!--<dl class="layui-nav-child">-->
+                            <!--<dd><a class="nav_item" data-url="system/user/userList.html" data-id="nav_2"><i class="fa fa-user"></i>用户管理</a></dd>-->
+                            <!--<dd><a class="nav_item" data-url="system/role/roleList.html" data-id="nav_3"><i class="fa fa-male"></i>角色管理</a></dd>-->
+                            <!--&lt;!&ndash;<dd><a class="nav_item" data-url="system/loginLog/loginLog.html" data-id="nav_4"><i class="fa fa-book"></i>登录日志</a></dd>&ndash;&gt;-->
+                            <!--<dd><a class="nav_item" data-url="system/operationLog/operationLogList.html" data-id="nav_4"><i class="fa fa-file-text-o"></i>操作日志</a></dd>-->
+                        <!--</dl>-->
+                    <!--</li>-->
+                        <!--<li class="layui-nav-item"><a class="nav_item" data-url="system/listing/estateList.html"-->
+                                                      <!--data-id="nav_2"><i class="fa fa-building"></i>房源管理</a></li>-->
+                        <!--<li class="layui-nav-item"><a class="nav_item" data-url="system/customer/customerList.html"-->
+                                                      <!--data-id="nav_3"><i class="fa fa-users"></i>客户信息</a></li>-->
+                        <!--<li class="layui-nav-item"><a class="nav_item" data-url="system/sales/saleList.html"-->
+                                                      <!--data-id="nav_4"><i-->
+                                <!--class="fa fa-address-card"></i>销售信息</a></li>-->
+                    <!--<li class="layui-nav-item" class="layui-nav-itemed"><a><i class="fa fa-cog"></i>业务管理</a>-->
+                    <!--<dl class="layui-nav-child">-->
+                    <!--<dd><a class="nav_item" data-url="system/listing/estateList.html" data-id="nav_5"><i class="fa a-building"></i>房源管理</a></dd>-->
+                    <!--<dd><a class="nav_item" data-url="system/customer/customerList.html" data-id="nav_6"><i class="fa fa-user"></i>客户管理</a></dd>-->
+                    <!--&lt;!&ndash;<dd><a class="nav_item" data-url="system/loginLog/loginLog.html" data-id="nav_4"><i class="fa fa-book"></i>登录日志</a></dd>&ndash;&gt;-->
+                    <!--<dd><a class="nav_item" data-url="system/sales/saleList.html" data-id="nav_7"><i class="fa fa-address-card"></i>销售信息</a></dd>-->
+                    <!--</dl>-->
+                    <!--</li>-->
+                        <!--<li class="layui-nav-item"><a class="nav_item" data-url="system/user/userList.html" data-id="nav_5"><i-->
+                                <!--class="fa fa-user-circle"></i>用户管理</a></li>-->
+                        <!--<li class="layui-nav-item"><a class="nav_item" data-url="system/role/roleList.html" data-id="nav_6"><i-->
+                                <!--class="fa fa-address-card"></i>角色管理</a></li>-->
+                        <!--<li class="layui-nav-item"><a class="nav_item" data-url="system/operationLog/operationLogList.html"-->
+                                                      <!--data-id="nav_7"><i-->
+                                <!--class=" fa fa-file-text-o"></i>操作日志</a></li>-->
+                    </ul>
+            </div>
+        </div>
+        <div class="main_right layui-body" style="position: absolute; top: 49px;">
+            <div class="main_right_tab  layui-tab" id="main_tab_group" lay-filter="main_tab_group"
+                 lay-allowClose="true">
+                <ul class="layui-tab-title">
+                    <li lay-id="lid_nav_1" class="layui-this  tab_index">首页</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="main_right_iframe layui-tab-item  layui-show">
+                        <iframe src="homepage.html" id="ifm_nav_1"></iframe>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+
+    layui.use('colorpicker', function () {
+        var $ = layui.$
+            , colorpicker = layui.colorpicker;
+        //开启全功能
+        colorpicker.render({
+            elem: '#test-all'
+            ,color: 'rgba(7, 155, 140, 1)'
+            ,format: 'rgb'
+            ,predefine: true
+            ,alpha: true
+            ,done: function(color){
+                $('#test-all-input').val(color); //向隐藏域赋值
+                layer.tips('给指定隐藏域设置了颜色值：'+ color, this.elem);
+                color || this.change(color); //清空时执行 change
+            }
+            , change: function (color) {
+                //给当前页面头部和左侧设置主题色
+                $('.header-demo,.layui-nav,.layui-side,.layui-tab-title ,.layui-nav-tree,.layui-nav-item').css('background-color', color);
+            }
+        });
+
+    });
+</script>
+
+</html>

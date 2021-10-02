@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <meta name="keywords" content="关键字"/>
+    <meta name="description" content="描述"/>
+    <title>角色管理</title>
+    <link href="../../../img/hours.ico" rel="icon" type="image/x-icon">
+    <script src="../../../base/js/jquery-3.3.1.min.js" type="application/javascript"></script>
+    <script src="../../../base/js/baseUtil.js" type="application/javascript"></script>
+    <script src="../../../base/js/global.js" type="application/javascript"></script>
+    <script src="../../../base/js/requestUtil.js"></script>
+    <script src="js/roleList.js" type="application/javascript"></script>
+    <script src="../../../base/plugins/layui/layui.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="../../../base/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="../../../base/css/global.css">
+
+</head>
+<body>
+<div class="body">
+    <form class="layui-form" class="formsearch">
+    <div class="buttin_group layui-inline"><a class="layui-btn layui-btn-normal" id="btnAdd">新增角色</a>　
+        <a class="layui-btn layui-btn-danger" id="btnDelmore">批量删除</a></div>
+    <div class="search_item_group layui-inline">
+        <label class="layui-form-label">角色名称：</label>
+        <div class="layui-input-inline"id="formSearch" >
+            <input class="layui-input search" type="text" name="name" placeholder="请输入搜索的角色名称">
+        </div>
+        <div class="layui-inline" style="position: relative;left: 15px;top:-5px;"><a class="layui-btn" id="btnSearch">搜索</a></div>
+    </div>
+
+</form>
+    <table  id="myTable" class="layui-table  layui-form">
+        <thead>
+        <tr>
+            <th><input type="checkbox" class="inpDel"></th>
+            <th>角色名称</th>
+           <th>角色描述</th>
+            <th>更新人</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="checkbox" class="inpDel"></td>
+            <td>管理员</td>
+            <td>管理员专用</td>
+            <td>admin</td>
+            <td>2018-09-19 11:25:15</td>
+            <td><a class="layui-btn layui-btn-xs layui-btn-normal">编辑</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="inpDel"></td>
+            <td>管理员</td>
+            <td>管理员专用</td>
+            <td>admin</td>
+            <td>2018-09-19 11:25:15</td>
+            <td><a class="layui-btn layui-btn-xs layui-btn-normal">编辑</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="inpDel"></td>
+            <td>管理员</td>
+            <td>管理员专用</td>
+            <td>admin</td>
+            <td>2018-09-19 11:25:15</td>
+            <td><a class="layui-btn layui-btn-xs layui-btn-normal">编辑</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="inpDel"></td>
+            <td>管理员</td>
+            <td>管理员专用</td>
+            <td>admin</td>
+            <td>2018-09-19 11:25:15</td>
+            <td><a class="layui-btn layui-btn-xs layui-btn-normal">编辑</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger">删除</a>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="6">
+                <p id="printPage" class="layui-box layui-laypage layui-laypage-default">
+                    <span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>
+                    <a href="">2</a>
+                    <a href="">3</a>
+                    <a href="">...</a>
+                    <a href="">10</a>
+                </p>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+</body>
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+    });
+</script>
+
+</html>

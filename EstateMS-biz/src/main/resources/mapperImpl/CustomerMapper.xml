@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hnwlxy.zr.EstateMS.biz.mapper.CustomerMapper">
+    <resultMap id="mapCustomerVo" type="com.hnwlxy.zr.EstateMS.common.vo.CustomerVo">
+        <id property="customer_id" column="customer_id"></id>
+        <result property="estate_id" column="estate_id"></result>
+        <result property="estate_names" column="estate_names"></result>
+        <association property="customer" javaType="com.hnwlxy.zr.EstateMS.common.pojo.Customer">
+            <id property="customer_id" column="customer_id"></id>
+            <result property="customer_name" column="customer_name"></result>
+            <result property="customer_phone" column="customer_phone"></result>
+            <result property="customer_sex" column="customer_sex"></result>
+            <result property="create_time" column="create_time"></result>
+            <result property="update_time" column="update_time"></result>
+            <result property="customer_address" column="customer_address"></result>
+            <result property="customer_card_id" column="customer_card_id"></result>
+            <result property="is_deleted" column="is_deleted"></result>
+        </association>
+        <!--<association property="estate" javaType="com.estate.system.pojo.Estate">-->
+            <!--<id property="estate_id" column="estate_id"></id>-->
+            <!--<result property="estate_name" column="estate_name"></result>-->
+            <!--<result property="estate_buildingNum" column="estate_buildingNum"></result>-->
+            <!--<result property="estate_unitNum" column="estate_unitNum"></result>-->
+            <!--<result property="estate_floorNum" column="estate_floorNum"></result>-->
+            <!--<result property="estate_roomNum" column="estate_roomNum"></result>-->
+        <!--</association>-->
+        <!-- 一对多映射 -->
+        <collection property="listCustomerEstate" ofType="com.hnwlxy.zr.EstateMS.common.pojo.CustomerEstate">
+            <id property="customer_estate_id" column="customer_estate_id"></id>
+            <result property="customer_id" column="customer_id"></result>
+            <result property="estate_id" column="estate_id"></result>
+            <result property="developer_id" column="developer_id"></result>
+        </collection>
+    </resultMap>
+
+    <select id="selectCustomerByCardId" parameterType="String" resultType="com.hnwlxy.zr.EstateMS.common.pojo.Customer">
+        select count(*) from t_s_customer where is_deleted=0 and customer_card_id=#{cardId}
+    </select>
+
+    <!--合并同一个客户id的房产名称-->
+    <sql id="selectCustomerEstates">
+        select customer_id,GROUP_CONCAT(se.estate_name,se.estate_buildingNum,se.estate_unitNum,se.estate_floorNum,se.estate_roomNum SEPARATOR ',')as estate_names
+        from t_s_customer_estate sce
+        join t_s_estate se on sce.estate_id=se.estate_id and se.is_deleted=0
+        GROUP BY customer_id
+    </sql>
+
+
+    <select id="selectCustomerVo" parameterType="com.hnwlxy.zr.EstateMS.common.model.QueryParams" resultMap="mapCustomerVo">
+        select sc.*,tce.estate_names from t_s_customer sc
+        left join (
+        <include refid="selectCustomerEstates"></include>
+        )tce on tce.customer_id=sc.customer_id
+        where sc.is_deleted=0
+        <if test="where!=null and where!=''">
+            and ${where}
+        </if>
+        order by
+        <if test="order != null and order != ''">
+            ${order}
+        </if>
+        sc.customer_card_id asc
+    </select>
+
+    <select id="selectCustomerVoByCustomerId" resultMap="mapCustomerVo" parameterType="int">
+       select c.*,sce.estate_id from t_s_customer c
+        left join t_s_customer_estate sce
+        on sce.customer_id=c.customer_id
+        where c.customer_id=#{customerId}  and c.is_deleted=0
+    </select>
+
+    <insert id="insertCustomer" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.Customer" useGeneratedKeys="true" keyProperty="customer_id">
+        insert into t_s_customer (customer_card_id,customer_name,customer_phone,customer_address,customer_sex,
+              create_user_id,create_user_name,create_time,update_user_id,update_user_name,update_time,is_deleted)
+        values (#{customer_card_id},#{customer_name},#{customer_phone},#{customer_address},#{customer_sex},
+            #{create_user_id},#{create_user_name},now(),#{update_user_id},#{update_user_name},#{update_time},0)
+    </insert>
+
+    <update id="updateCustomerVo" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.Customer">
+        update t_s_customer set
+        <if test="customer_card_id != null and customer_card_id != ''">
+            customer_card_id=#{customer_card_id},
+        </if>
+        <if test="customer_name != null and customer_name != ''">
+            customer_name=#{customer_name},
+        </if>
+        <if test="customer_address != null and customer_address != ''">
+            customer_address=#{customer_address},
+        </if>
+        <if test="customer_phone != null and customer_phone != ''">
+            customer_phone=#{customer_phone},
+        </if>
+        <if test="customer_sex != null">
+            customer_sex=#{customer_sex},
+        </if>
+            update_user_id=#{update_user_id},
+            update_user_name=#{update_user_name},
+            update_time=now()
+        where customer_id=#{customer_id}
+    </update>
+
+    <!--理论删除客户-->
+    <update id="removeCustomerInPk" parameterType="String">
+        update t_s_customer set is_deleted=1
+        where customer_id in(${customerIds}) and is_deleted=0
+    </update>
+
+    <!--添加客户房产关系-->
+    <insert id="insertCustomerEstate" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.CustomerEstate" keyProperty="customer_estate_id" useGeneratedKeys="true">
+        insert into t_s_customer_estate
+        (customer_id,estate_id,developer_id)
+        values (#{customer_id},#{estate_id},1)
+    </insert>
+
+    <!--删除客户房产关系-->
+    <delete id="deleteEstateNames" parameterType="String">
+        delete from t_s_customer_estate
+        where customer_id in (${fkCustomerIds})
+    </delete>
+
+
+</mapper>

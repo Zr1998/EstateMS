@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../../../base/js/jquery-3.3.1.min.js"></script>
+    <script src="../../../base/plugins/layui/layui.js"></script>
+    <script src="../../../base/js/requestUtil.js"></script>
+    <script src="../../../base/js/baseUtil.js"></script>
+    <script src="../../../base/js/global.js"></script>
+    <script src="js/showSaleInfo.js"></script>
+    <link rel="stylesheet"  href="../../../base/plugins/layui/css/layui.css">
+
+    <title>销售信息详情</title>
+
+</head>
+<body>
+<div class="layui-card-header">销售信息详情</div>
+<div class="layui-card-body" pad15="">
+    <form class="layui-form" id="form_submit">
+        <div class="layui-form-item">
+            <label class="layui-form-label">购房人：</label>
+            <div class="layui-input-block">
+                <lable  id="user_name_contract">购房人</lable>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所购房产：</label>
+            <div class="layui-input-block">
+                <lable  id="purchase_estates_contract">所购房产</lable>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开发商名：</label>
+            <div class="layui-input-block">
+                    <lable  id="developer_name_contract">开发商名</lable>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">预购总金：</label>
+            <div class="layui-input-block">
+                ￥<lable  id="purchase_total_contract">元</lable>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">预购时间：</label>
+            <div class="layui-input-block">
+                <lable  id="purchase_time_contract">预购时间</lable>
+            </div>
+        </div>
+
+    <div class=" layui-input-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-danger btn_close" type="button" id="btnClose">返回</button>
+        </div>
+    </div>
+    </form>
+</div>
+</body>
+<script>
+    layui.use(['form', 'laydate'], function () {
+        var laydate = layui.laydate;
+        //日期选择器
+        laydate.render({
+            elem: '#purchase_time_contract'
+        });
+    });
+</script>
+</html>

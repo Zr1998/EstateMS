@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>房屋详情</title>
+    <link rel="icon" type="imgae/x-icon" href="../../img/hours.ico"/>
+    <script src="../../base/js/jquery-3.3.1.min.js"></script>
+    <script src="../../base/plugins/layui/layui.js"></script>
+    <script src="../../base/js/requestUtil.js"></script>
+    <script src="../../base/js/global.js"></script>
+    <script src="../../base/js/baseUtil.js"></script>
+    <script src="js/detail.js"></script>
+    <link rel="stylesheet" href="../../base/plugins/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="../../base/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/detailsPage.css">
+    <link rel="stylesheet" href="../../base/css/global.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        #session_user_div{
+            float: right;
+            padding: 0 20px;
+        }
+        span.layui-nav-bar{
+            height: 0px;
+            top: 80px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="title fl">
+    <h1><img src="../../img/logo.png" height="52" width="67"/>房产销售管理系统</h1>
+</div>
+<div class="nav-wrap">
+    <ul class="nav">
+        <li><a href="home.html">首页</a></li>
+        <li><a href="#">好房推荐</a></li>
+        <li><a href="#">最新资讯</a></li>
+        <li><a href="#">特色楼盘</a></li>
+        <li><a href="#">精装房</a></li>
+        <li><a href="home.html">购房流程</a></li>
+        <div class="fr" id="login_div">
+            <li><a href="../../login.html"><i class="fa fa-user"></i>登录</a>|</li>
+            <li><a href="../../registered.html"><i class="fa fa-sign-in"></i>注册</a></li>
+        </div>
+        <div id="session_user_div" class="hidden layui-nav" style="background-color: white;">
+            <li class="layui-nav-item" style="line-height: 80px;">
+                <img  id="session_user_url" src="//t.cn/RCzsdCq" class="layui-nav-img">
+                <font style="color: black">欢迎您，</font>
+                <lable  id="session_user_name" style="color:black">张三</lable>
+                <font style="color: black">！</font>
+                <dl class="layui-nav-child" id="navTopGroup">
+                    <dd><a href="javascript:;"  id="btnUpdate"><i class="fa fa-address-card-o"></i>我的信息</a></dd>
+                    <dd><a href="javascript:;" id="btnEdit"><i class="fa fa-edit"></i>修改密码</a></dd>
+                    <dd><a href="javascript:;" id="btnLoginOut"><i class="fa fa-undo"></i>安全退出</a></dd>
+                </dl>
+            </li>
+        </div>
+    </ul>
+</div>
+<div class="header">
+    <div class="home">
+        <h1>房屋详情</h1>
+    </div>
+</div>
+<div class="cover"></div>
+<!--轮播图-->
+<div class="layui-carousel" id="test1">
+    <div carousel-item>
+        <div><img src="../../img/carouselMap/1.jpg"></div>
+        <div><img src="../../img/carouselMap/2.jpg"></div>
+        <div><img src="../../img/carouselMap/3.jpg"></div>
+        <div><img src="../../img/carouselMap/4.jpg"></div>
+        <div><img src="../../img/carouselMap/img2.jpg"></div>
+    </div>
+</div>
+
+<div class="body">
+    <div class="box">
+        <div class="hours-img fl">
+            <img src="../../img/property/1.jpg" id="estate_photo" alt="" width="400" height="380">
+        </div>
+        <input type="hidden" id="userId">
+        <table style="margin-top: 70px" id="estateTable">
+            <thead>
+            <th colspan="2"><h2 style="text-align: left;">嘉兴商务中心</h2></th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>小区名称：</td>
+                <td id="estateName">锦程公寓</td>
+            </tr>
+            <tr>
+                <td>房屋格局：</td>
+                <td id="estateStructure">两室一厅</td>
+            </tr>
+            <tr>
+                <td>装修类型：</td>
+                <td>精装修</td>
+            </tr>
+            <tr>
+                <td>房屋面积：</td>
+                <td id="estateArea">120m²</td>
+            </tr>
+            <tr>
+                <td>房屋价格：</td>
+                <td id="estatePrice">￥8888元/m²</td>
+            </tr>
+            <tr>
+                <td>
+                    <a>
+                        <button style="background-color: red" class="layui-btn layui-btn-normal" id="btnBuy">预购</button>
+                    </a>
+                </td>
+                <td>
+                    <a>
+                        <button style="background-color: #ea9f49" class="layui-btn layui-btn-normal" id="btnBack">返回</button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="box2">
+    <h2 style="text-indent: 1em; font-weight: 600">产品详情</h2>
+    <div style="margin-top: 10px ">
+        <p style="text-indent: 3em">
+            配套齐全，小区出门就是餐饮，购物广场，学校，医院，菜市场都在1000米范围内。小区自带就有幼儿园，小学，重点中学，大润发超市，大型广场，国际影城，四大银行，超大公园，娱乐场。美食街所应有尽有，只有你想不到的，没有你买不到的。2、【交通配套】交通方便，步行到地铁站5分钟，自驾出行国道高速四通八达，公交站牌就在小区门口,高铁四线为一体。3、【优惠政策】卖的非常火，价格低，低于周边小区，让你花少的钱，买理想的住所。房子价格越来越高，早买早赚到，性价比高。可以落户口，不用为小孩读书而操心。</p>
+    </div>
+    </div>
+
+<!--底部-->
+<div class="footer">
+    <div class="foot fl">
+        <div class="foot-img fl">
+            <img src="../../img/ad/time1.png" alt="">
+        </div>
+        <div class="foot-text fl"><p>工作时间</p>
+            <p>9:00-16:00</p></div>
+    </div>
+    <div class="foot fl">
+        <div class="foot-img fl">
+            <img src="../../img/ad/time2.png" alt="">
+        </div>
+        <div class="foot-text fl">
+            <p>预约看房</p>
+            <p>预约成功后线下看房选房</p>
+        </div>
+    </div>
+    <div class="foot fl">
+        <div class="foot-img fl">
+            <img src="../../img/ad/time3.png" alt="">
+        </div>
+        <div class="foot-text fl">
+            <p>联系我们</p>
+            <p>1001001</p>
+        </div>
+    </div>
+    <div class="foot fl">
+        <div class="foot-img fl">
+            <img src="../../img/ad/time4.png" alt="">
+        </div>
+        <div class="foot-text fl">
+            <p>欢迎咨询</p>
+            <p>有任何问题请联系我们</p>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>©2018 可乐可乐—房地产版权所有</p>
+        <p> 房地产| 买房子我们更专业 | 欢迎去往销售中心</p>
+    </div>
+</div>
+<!--底部end-->
+</body>
+<script>
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            , width: '100%' //设置容器宽度
+            , arrow: 'always' //始终显示箭头
+            , height: '540px'
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+</script>
+</html>

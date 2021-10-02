@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hnwlxy.zr.EstateMS.biz.mapper.EstateMapper">
+    <resultMap id="mapEstateVo" type="com.hnwlxy.zr.EstateMS.common.vo.EstateVo">
+        <id property="estate_id" column="estate_id"></id>
+        <result property="developer_name" column="developer_name"></result>
+        <result property="hType_name" column="hType_name"></result>
+        <result property="vType_name" column="vType_name"></result>
+        <association property="estate" javaType="com.hnwlxy.zr.EstateMS.common.pojo.Estate">
+            <id property="estate_id" column="estate_id"></id>
+            <result property="estate_name" column="estate_name"></result>
+            <result property="estate_buildingNum" column="estate_buildingNum"></result>
+            <result property="estate_unitNum" column="estate_unitNum"></result>
+            <result property="estate_floorNum" column="estate_floorNum"></result>
+            <result property="estate_roomNum" column="estate_roomNum"></result>
+            <result property="estate_houseType_id" column="estate_houseType_id"></result>
+            <result property="estate_area" column="estate_area"></result>
+            <result property="estate_structure" column="estate_structure"></result>
+            <result property="estate_price" column="estate_price"></result>
+            <result property="estate_photo" column="estate_photo"></result>
+            <result property="estate_viewId" column="estate_viewId"></result>
+            <result property="estate_developer_id" column="estate_developer_id"></result>
+            <result property="estate_state" column="estate_state"></result>
+            <result property="is_deleted" column="is_deleted"></result>
+            <result property="create_user_id" column="create_user_id"></result>
+            <result property="create_user_name" column="create_user_name"></result>
+            <result property="create_time" column="create_time"></result>
+            <result property="update_user_id" column="update_user_id"></result>
+            <result property="update_user_name" column="update_user_name"></result>
+            <result property="update_time" column="update_time"></result>
+        </association>
+        <association property="developer" javaType="com.hnwlxy.zr.EstateMS.common.pojo.Developer">
+            <id property="developer_id" column="developer_id"></id>
+            <result property="developer_name" column="developer_name"></result>
+            <result property="developer_address" column="developer_address"></result>
+            <result property="developer_legalPerson" column="developer_legalPerson"></result>
+            <result property="developer_regNumber" column="developer_regNumber"></result>
+            <result property="developer_telphone" column="developer_telphone"></result>
+        </association>
+        <association property="fileLog" javaType="com.hnwlxy.zr.EstateMS.common.pojo.FileLog">
+            <id property="file_log_id" column="file_log_id"></id>
+            <result property="save_path" column="save_path"></result>
+        </association>
+        <!--<association property="fileLog" javaType="com.dc.pojo.Filelog">-->
+            <!--<id property="file_log_id" column="file_log_id"></id>-->
+            <!--<result property="save_path" column="save_path"></result>-->
+        <!--</association>-->
+        <!-- 一对多映射 -->
+        <!--<collection property="listUserRole" ofType="com.dc.pojo.UserRole">-->
+            <!--<id property="user_role_id" column="user_role_id"></id>-->
+            <!--<result property="fk_user_id" column="fk_user_id"></result>-->
+            <!--<result property="fk_role_id" column="fk_role_id"></result>-->
+        <!--</collection>-->
+    </resultMap>
+    <!--<sql id="selectnames">-->
+        <!--select vt.vType_name,ht.hType_name  from t_s_housetype as ht,t_s_developer as d,t_s_viewtype as vt,-->
+    <!--</sql>-->
+    <select id="selectEstateVo" parameterType="com.hnwlxy.zr.EstateMS.common.model.QueryParams" resultMap="mapEstateVo">
+        select e.estate_id as estate_id,e.estate_name as estate_name,e.estate_buildingNum as estate_buildingNum,e.estate_unitNum as estate_unitNum, e.estate_floorNum as estate_floorNum,e.estate_roomNum as estate_roomNum ,
+        e.estate_structure as estate_structure,e.estate_price as estate_price,e.estate_state as estate_state,e.estate_area as estate_area,
+        d.developer_name as developer_name,vt.vType_name as vType_name,ht.hType_name as hType_name,slf.file_log_id,slf.save_path from
+        t_s_estate e,
+        t_s_developer d,t_s_viewtype vt,
+        t_s_housetype ht,
+        t_s_filelog slf
+        where
+        e.estate_developer_id=d.developer_id and
+        e.estate_houseType_id=ht.hType_id and
+        e.estate_viewId=vt.vType_id and
+        e.estate_photo=slf.file_log_id and
+        e.is_deleted=0
+        <if test="where!=null and where!=''">
+            and ${where}
+        </if>
+        order by
+        <if test="order != null and order != ''">
+            ${order}
+        </if>
+        e.estate_name desc
+    </select>
+
+    <select id="selectEstateVoByEstateId" parameterType="int" resultMap="mapEstateVo">
+        select e.*,d.*,slf.file_log_id,slf.save_path from
+        t_s_estate as e
+        left join t_s_filelog slf
+        on e.estate_photo=slf.file_log_id and slf.is_deleted=0
+		left join t_s_developer d
+		on e.estate_developer_id=d.developer_id
+        where
+        e.is_deleted=0 and e.estate_id=#{estateId}
+    </select>
+
+    <select id="selectEstateByEstateId" parameterType="int" resultType="com.hnwlxy.zr.EstateMS.common.pojo.Estate">
+        select * from t_s_estate where is_deleted=0 and estate_id=#{estateId}
+    </select>
+
+    <select id="selectEstateByEstateName" parameterType="String" resultType="com.hnwlxy.zr.EstateMS.common.pojo.Estate">
+        select * from t_s_estate where estate_name = #{estate_name}
+    </select>
+
+    <select id="selectEstateView" resultType="com.hnwlxy.zr.EstateMS.common.pojo.ViewType">
+        select * from t_s_viewtype order by vType_id asc
+    </select>
+    
+    <select id="selectHouseType" resultType="com.hnwlxy.zr.EstateMS.common.pojo.HouseType">
+        select * from t_s_housetype order by  hType_id asc
+    </select>
+
+    <select id="selectEstateDeveloper" resultType="com.hnwlxy.zr.EstateMS.common.pojo.Developer">
+        select developer_name,developer_id from t_s_developer order by developer_id asc
+    </select>
+
+    <insert id="insertEstate" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.Estate" keyProperty="estate_id" useGeneratedKeys="true">
+        insert into t_s_estate (estate_name,estate_buildingNum,estate_unitNum,estate_floorNum,estate_roomNum,
+        estate_houseType_id,estate_area,estate_structure,estate_price,estate_photo,estate_viewId,estate_developer_id,estate_state,is_deleted,
+        create_user_id,create_user_name,create_time
+        )
+        values (#{estate_name},#{estate_buildingNum},#{estate_unitNum},#{estate_floorNum},#{estate_roomNum},
+        #{estate_houseType_id},#{estate_area},#{estate_structure},#{estate_price},#{estate_photo},
+        #{estate_viewId},#{estate_developer_id},0,0,#{create_user_id},#{create_user_name},now())
+    </insert>
+
+    <update id="updateEstateVo" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.Estate">
+        update t_s_estate set
+        <if test="estate_name != null and estate_name != ''">
+            estate_name=#{estate_name},
+        </if>
+        <if test="estate_area != null and estate_area != ''">
+            estate_area=#{estate_area},
+        </if>
+        <if test="estate_buildingNum != null and estate_buildingNum != ''">
+            estate_buildingNum=#{estate_buildingNum},
+        </if>
+        <if test="estate_floorNum != null and estate_floorNum != ''">
+            estate_floorNum=#{estate_floorNum},
+        </if>
+        <if test="estate_developer_id != null">
+            estate_developer_id=#{estate_developer_id},
+        </if>
+        <if test="estate_unitNum != null and estate_unitNum != ''">
+            estate_unitNum=#{estate_unitNum},
+        </if>
+        <if test="estate_structure != null and estate_structure != ''">
+            estate_structure=#{estate_structure},
+        </if>
+        <if test="estate_photo != null and estate_photo != ''">
+            estate_photo=#{estate_photo},
+        </if>
+        <if test="estate_price != null and estate_price != ''">
+            estate_price=#{estate_price},
+        </if>
+        <if test="estate_viewId != null">
+            estate_viewId=#{estate_viewId},
+        </if>
+        <if test="estate_houseType_id != null">
+            estate_houseType_id=#{estate_houseType_id},
+        </if>
+        <if test="estate_roomNum != null and estate_roomNum != ''">
+            estate_roomNum=#{estate_roomNum},
+        </if>
+        update_time = now(),
+        update_user_name = #{update_user_name},
+        update_user_id = #{update_user_id}
+        where estate_id=#{estate_id}
+    </update>
+
+
+    <!--理论删除房源-->
+    <update id="deleteEstate" parameterType="String">
+        update t_s_estate set is_deleted=1 where estate_id in (${estateIds})  and is_deleted=0
+    </update>
+
+    <!--根据房产ID修改房产状态-->
+    <update id="tiggerState" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.Estate">
+        update t_s_estate
+        set
+        estate_state=#{estate_state}
+        where estate_id = #{estate_id}
+    </update>
+
+
+    <!--删除客户时将客户已售房屋状态切换-->
+    <update id="changeStateByCustomerId" parameterType="String">
+        update  t_s_estate set estate_state=0
+        where estate_id in (select estate_id from t_s_customer_estate where customer_id in(${customerIds}))
+    </update>
+
+    <!--新增或者修改客户时将未售房屋状态切换-->
+    <update id="tiggerStateByCustomerId" parameterType="int">
+        update  t_s_estate set estate_state=1
+        where estate_id in (select estate_id from t_s_customer_estate where customer_id in(${customerIds}))
+    </update>
+
+
+    <select id="selectEstateName" resultType="com.hnwlxy.zr.EstateMS.common.pojo.Estate">
+        select estate_name,estate_buildingNum,estate_unitNum,estate_floorNum,estate_roomNum,estate_id from t_s_estate
+        where is_deleted=0
+          order by  estate_name asc
+    </select>
+</mapper>

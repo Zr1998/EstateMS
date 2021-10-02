@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../../img/hours.ico" rel="icon" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="../../../base/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="../../../base/css/global.css">
+    <script src="../../../base/js/jquery-3.3.1.min.js"></script>
+    <script src="../../../base/plugins/layui/layui.js"></script>
+    <script src="../../../base/js/requestUtil.js"></script>
+    <script src="../../../base/js/global.js"></script>
+    <script src="../../../base/js/baseUtil.js"></script>
+    <script src="js/customerEdit.js"></script>
+    <title>新增客户信息</title>
+</head>
+<style>
+    .belongForEstate dl{
+        float: left;
+    }
+    .belongForEstate dl dt{
+        float: left;
+    }
+    .belongForEstate dd{
+        float: left;
+    }
+</style>
+<body>
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>新增客户信息</legend>
+</fieldset>
+<form class="layui-form" id="form_submit">
+    <div class="layui-form-item">
+        <label class="layui-form-label">证件号码：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" placeholder="请输入身份证号" type="text" name="customer.customer_card_id" id="customer-cardId-submit" >
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户姓名：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" placeholder="请输入姓名" type="text" name="customer.customer_name" id="name-customer-submit" >
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户性别：</label>
+        <div class="layui-input-block" id="sexGroup">
+            <input name="customer.customer_sex" value="0" type="radio" title="男">
+            <input name="customer.customer_sex" value="1" type="radio" title="女">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户籍贯：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" placeholder="请输入客户籍贯" type="text" name="customer.customer_address" id="address-customer-submit">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户电话：</label>
+        <div class="layui-input-block">
+            <input class="layui-input" placeholder="请输入电话号码" type="text" name="customer.customer_phone" id="phone-customer-submit">
+        </div>
+    </div>
+    <div class="layui-form-item belongForEstate">
+    <label class="layui-form-label">名下房产：</label>
+        <div class="layui-input-block" id="estateNameGroup">
+            <input type="checkbox" title="发发发">
+            <input type="checkbox" title="发发发">
+        </div>
+</div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" type="button" id="btnSubmit">提交</button>
+            <button class="layui-btn  layui-btn-danger btn_close" type="button" id="btnClose">关闭</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

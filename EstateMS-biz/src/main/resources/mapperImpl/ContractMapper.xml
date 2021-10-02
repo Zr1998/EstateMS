@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hnwlxy.zr.EstateMS.biz.mapper.ContractMapper">
+    <resultMap id="mapContractVo" type="com.hnwlxy.zr.EstateMS.common.vo.ContractVo">
+        <id property="contract_id" column="contract_id"></id>
+        <result property="estate_nums" column="estate_nums"></result>
+        <result property="developer_name" column="developer_name"></result>
+        <result property="estate_names" column="estate_names"></result>
+        <result property="price" column="price"></result>
+        <result property="sign_time" column="sign_time"></result>
+        <association property="user" javaType="com.hnwlxy.zr.EstateMS.common.pojo.User">
+            <id property="user_id" column="user_id"></id>
+            <result property="user_account" column="user_account"></result>
+            <result property="user_name" column="user_name"></result>
+            <result property="is_deleted" column="is_deleted"></result>
+            <result property="version" column="version"></result>
+        </association>
+        <collection property="contract" ofType="com.hnwlxy.zr.EstateMS.common.pojo.Contract">
+            <id property="contract_id" column="contract_id"></id>
+            <result property="estate_id" column="estate_id"></result>
+            <result property="user_id" column="user_id"></result>
+            <result property="developer_id" column="developer_id"></result>
+            <result property="create_time" column="create_time"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="selectUserEstates">
+        select user_id,count(sct.estate_id)as estate_nums,sd.developer_name as developer_name,sct.create_time as sign_time,
+        GROUP_CONCAT(se.estate_name,se.estate_buildingNum,se.estate_unitNum,se.estate_floorNum,se.estate_roomNum SEPARATOR ',')as estate_names
+        from t_s_contract sct
+        left join t_s_estate se on sct.estate_id=se.estate_id and se.is_deleted=0
+        left join t_s_developer sd on sct.developer_id=sd.developer_id
+        GROUP BY user_id
+    </sql>
+
+    <select id="selectContractVo" resultMap="mapContractVo" parameterType="com.hnwlxy.zr.EstateMS.common.model.QueryParams">
+        select sct.user_id as user_id,su.user_name,count(sct.estate_id)as estate_nums,sd.developer_name as developer_name,sct.create_time as sign_time,GROUP_CONCAT(se.estate_name,se.estate_buildingNum,se.estate_unitNum,se.estate_floorNum,se.estate_roomNum SEPARATOR ';')as estate_names
+        from t_s_contract sct
+        left join t_s_estate se on sct.estate_id=se.estate_id and se.is_deleted=0
+        left join t_s_developer sd on sct.developer_id=sd.developer_id
+        left join t_s_user su on sct.user_id=su.user_id
+        <if test="where != null and where != ''">
+            where   ${where}
+        </if>
+        GROUP BY user_id
+        order by
+        <if test="order != null and order != ''">
+            ${order}
+        </if>
+        user_id asc
+    </select>
+
+
+    <sql id="selectUserContract">
+        select user_id,sum(se.estate_price) as price,sd.developer_name as developer_name,
+        GROUP_CONCAT(se.estate_name,se.estate_buildingNum,se.estate_unitNum,se.estate_floorNum,se.estate_roomNum SEPARATOR ',')as estate_names
+        from t_s_contract sct
+        left join t_s_estate se on sct.estate_id=se.estate_id and se.is_deleted=0
+				left join t_s_developer sd on sct.developer_id=sd.developer_id
+        GROUP BY user_id
+    </sql>
+
+    <select id="selectContractVoByUserId" parameterType="int" resultMap="mapContractVo">
+        select su.*,tc.price,tc.developer_name,tc.estate_names from t_s_user su
+        left join(
+          <include refid="selectUserContract"></include>
+        ) tc on tc.user_id=su.user_id
+        where su.is_deleted=0 and su.user_id=#{userId}
+    </select>
+
+    <insert id="insertContract" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.Contract" useGeneratedKeys="true" keyProperty="contract_id">
+        insert into t_s_contract(estate_id,user_id,developer_id,create_time) values (#{estate_id},#{user_id},1,now())
+    </insert>
+
+</mapper>

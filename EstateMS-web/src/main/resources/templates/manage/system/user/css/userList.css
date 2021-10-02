@@ -1,0 +1,33 @@
+
+.layui-input-inline .layui-input{
+    margin-bottom: 10px;
+}
+.search_item_group{
+    margin-top: 10px;
+    height:90px;
+    margin-bottom: 10px;
+}
+.search_div{
+    width:30px;
+    position: relative;
+    left: 303px;
+    top:-48px;
+}
+.search_div #btnAdvancedSearch{
+    width:100px;
+    position: relative;
+    left:68px;
+    top:-38px;
+}
+
+.layui-form .layui-form-switch{
+    margin-left:35px;
+}
+
+.layui-btn{
+    margin-left:4px;
+}
+
+.layui-btn+.layui-btn{
+    margin-left:4px;
+}

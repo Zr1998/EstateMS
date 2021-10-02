@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hnwlxy.zr.EstateMS.biz.mapper.OperationLogMapper">
+    <select id="selectPageOperationLog" parameterType="com.hnwlxy.zr.EstateMS.common.model.QueryParams" resultType="com.hnwlxy.zr.EstateMS.common.pojo.OperationLog">
+        select * from t_s_operationlog
+        <if test="where != '' and where != null">
+            where ${where}
+        </if>
+        order by
+        <if test="order != null and order != ''">
+            ${order}
+        </if>
+        date desc
+    </select>
+
+    <insert id="insert" parameterType="com.hnwlxy.zr.EstateMS.common.pojo.OperationLog" useGeneratedKeys="true" keyProperty="user_id">
+      insert into t_s_operationlog
+          (user_id, user_name, user_account, date, content, type, module, request_ip, param_before, param_after, request_params, request_method)
+         values
+         (#{user_id}, #{user_name}, #{user_account}, now(), #{content}, #{type}, #{module}, #{request_ip}, #{param_before}, #{param_after}, #{request_params}, #{request_method})
+    </insert>
+</mapper>

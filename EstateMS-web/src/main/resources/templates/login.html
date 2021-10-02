@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>房产销售管理系统 | 登录页面</title>
+    <link href="img/hours.ico" rel="icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="index/css/login.css">
+    <link rel="stylesheet" type="text/css" href="base/plugins/layui/css/layui.css">
+    <script src="base/js/jquery-3.3.1.min.js"></script>
+    <script src="base/js/requestUtil.js"></script>
+    <script src="index/js/login.js"></script>
+    <script src="base/js/security.js"></script>
+    <script src="base/js/jquery.cookie.js"></script>
+
+</head>
+<body>
+<div class="wrap">
+    <div class="login">
+        <div class="login_header">
+            <div class="fl">用户登录</div>
+            <div class="fr">还没有账号
+                <a id="registered" href="registered.html" onclick="return true;">立即注册</a></div>
+        </div>
+        <form id="login_form"  class="layui-form">
+            <div class="login_input">
+                <input class="layui-input" type="text" id="user_account-submit" name="user.user_account" placeholder="用户名">
+                <input class="layui-input" type="password" id="user_password-submit" placeholder="密码">
+                <input class="layui-input" type="hidden" name="user.password" id="user_password-submit_hidden">
+                <div class="yanzhen">
+                    <input class="layui-input fl" name="ver" id="in1" placeholder="请输入验证码"/>
+                    <div class="verification fr" type="text"></div>
+                </div>
+            </div>
+            <div class="yzm"><label id="yz"></label></div>
+            <div class="login_foot">
+                <button class="layui-btn layui-btn-normal fr" id="btnSubmit" type="button">登录</button>
+                <div class="Rempas fl">
+                    <input class="remember" lay-skin="primary" type="checkbox" id="isSaved"  value="1">记住密码
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    layui.use(['form'], function(){
+        var form = layui.form
+
+    });
+</script>
+</html>

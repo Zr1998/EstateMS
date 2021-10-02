@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>填写购房信息</title>
+
+    <script src="../../base/js/jquery-3.3.1.min.js"></script>
+    <script src="../../base/plugins/layui/layui.js"></script>
+    <script src="../../base/js/requestUtil.js"></script>
+    <script src="../../base/js/global.js"></script>
+    <script src="../../base/js/baseUtil.js"></script>
+    <script src="js/purchase.js"></script>
+    <link rel="icon" type="imgae/x-icon" href="../../img/hours.ico"/>
+    <link rel="stylesheet" href="../../base/plugins/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="../../base/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="css/purchaseInfo.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/detailsPage.css">
+    <link rel="stylesheet" href="../../base/css/global.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        #session_user_div{
+            float: right;
+            padding: 0 20px;
+        }
+        span.layui-nav-bar{
+            height: 0px;
+            top: 80px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="title fl">
+    <h1><img src="../../img/logo.png" height="52" width="67"/>房产销售管理系统</h1>
+</div>
+<div class="nav-wrap">
+    <ul class="nav">
+        <li><a href="home.html">首页</a></li>
+        <li><a href="#">好房推荐</a></li>
+        <li><a href="#">最新资讯</a></li>
+        <li><a href="#">特色楼盘</a></li>
+        <li><a href="#">精装房</a></li>
+        <li><a href="home.html">购房流程</a></li>
+        <div class="fr" id="login_div">
+            <li><a href="../../login.html"><i class="fa fa-user"></i>登录</a>|</li>
+            <li><a href="../../registered.html"><i class="fa fa-sign-in"></i>注册</a></li>
+        </div>
+        <div id="session_user_div" class="hidden layui-nav" style="background-color: white;">
+            <li class="layui-nav-item" style="line-height: 80px;">
+                <img  id="session_user_url" src="//t.cn/RCzsdCq" class="layui-nav-img">
+                <font style="color: black">欢迎您，</font>
+                <lable  id="session_user_name" style="color:black">张三</lable>
+                <font style="color: black">！</font>
+                <dl class="layui-nav-child" id="navTopGroup">
+                    <!--<dd><a href="javascript:;">收信箱</a></dd>-->
+                    <dd><a href="javascript:;"  id="btnUpdate"><i class="fa fa-address-card-o"></i>我的信息</a></dd>
+                    <dd><a href="javascript:;" id="btnEdit"><i class="fa fa-edit"></i>修改密码</a></dd>
+                    <dd><a href="javascript:;" id="btnLoginOut"><i class="fa fa-undo"></i>安全退出</a></dd>
+                </dl>
+            </li>
+        </div>
+    </ul>
+</div>
+<section class="aui-content">
+    <div style="height:20px;"></div>
+    <div class="aui-content-up">
+        <form id="CustomerForm" action="" name="form1">
+            <div class="aui-content-up-form">
+                <h2>填写业主信息</h2>
+            </div>
+            <input id="estateId" type="hidden" name="listCustomerEstate[0].estate_id">
+            <div class="aui-form-group clear">
+                <label class="aui-label-control">
+                    身份证号 <em>*</em>
+                </label>
+                <div class="aui-form-input">
+                    <input type="text" class="aui-form-control-two" name="customer.customer_card_id" id="card_id" placeholder="请输入身份证号码"
+                           onBlur="checkpsd2()" required/>
+                    <span class="tips" id="customer_card_id">必须是18位的数字</span>
+                </div>
+            </div>
+            <div class="aui-form-group clear">
+                <label class="aui-label-control">
+                    姓名 <em>*</em>
+                </label>
+                <div class="aui-form-input">
+                    <input type="text" class="aui-form-control-two" name="customer.customer_name" onBlur="checkna()" required id="name"
+                           placeholder="请输入身份证名字">
+                    <span class="tips" id="customer_name">长度1~6个字符</span>
+                </div>
+            </div>
+            <div class="aui-form-group clear">
+                <label class="aui-label-control">性别 <em>*</em></label>
+                <div class="aui-form-input" style="margin-top: 8px">
+                    <input name="customer.customer_sex" value="0" type="radio" title="男" checked>男
+                    <input name="customer.customer_sex" value="1" type="radio" title="女" style="margin:0 5px 0 40px">女
+                </div>
+                <div class="aui-form-group clear">
+                    <label class="aui-label-control">籍贯 <em>*</em></label>
+                    <div class="aui-form-input">
+                        <input type="text" class="aui-form-control-two" name="customer.customer_address" id="address" placeholder="请输入籍贯"
+                               onBlur="checkpsd3()" required/>
+                        <span class="tips" id="customer_address">例如:浙江嘉兴</span>
+                    </div>
+                </div>
+                <div class="aui-form-group clear">
+                    <label class="aui-label-control">
+                        手机号码 <em>*</em>
+                    </label>
+                    <div class="aui-form-input">
+                        <input type="text" class="aui-form-control-two" name="customer.customer_phone" id="phone"
+                               placeholder="请输入11位的手机号码"
+                               onBlur="checkpsd1()" required/>
+                        <span class="tips" id="customer_phone">必须是11位的数字</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="aui-form-group-text">
+                <h3>需要以下材料</h3>
+                <p>此购房信息是购房重要凭证，请仔细填写。</p>
+            </div>
+        </form>
+    </div>
+    <div class="aui-btn-default">
+        <a href="javascript:;" class=" bounceInDown ">
+            <button class=" bounceInDown aui-btn aui-btn-account" id="btnAddCustomerInfo">提交</button>
+        </a>
+        <a>
+            <button class="aui-btn aui-btn-account" style="margin-left: 30px" id="btnCancel">取消</button>
+        </a>
+    </div>
+</section>
+
+
+<!--确认购房信息-->
+<div id="wrapper">
+    <!--<div class="box">-->
+        <div id="dialogBg"></div>
+        <div id="dialog" class="animated">
+            <img class="dialogIco" width="50" height="50" src="../../img/ico.png" alt=""/>
+            <div class="dialogTop">
+                <a href="javascript:;" class="claseDialogBtn">关闭</a>
+            </div>
+            <form action="" method="post" id="editForm">
+                <ul class="editInfos">
+                    <div style="font-size:24px" class="title">请确认您的购房信息</div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">购房人</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="buyerName">
+                                <input type="hidden" name="user_id" id="buyerId">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">所购买房</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="estate">
+                                <input type="hidden" id="estate_Id" name="estate_id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">开发商</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="developer">
+                                <input type="hidden" name="developer_id" id="developerId">
+                            </div>
+                        </div>
+                    </div>
+                    <li>
+                        <button class="aui-btn aui-btn-account" id="btnSubmit" type="button">确定提交</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    <!--</div>-->
+</div>
+</body>
+<script type="text/javascript">
+    var w, h, className;
+
+    function getSrceenWH() {
+        w = $(window).width();
+        h = $(window).height();
+        $('#dialogBg').width(w).height(h);
+    }
+
+    window.onresize = function () {
+        getSrceenWH();
+    }
+    $(window).resize();
+
+    $(function () {
+        getSrceenWH();
+        //显示弹框
+        $('.bounceInDown').click(function () {
+            className = $(this).attr('class');
+            $('#dialogBg').fadeIn(300);
+            $('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
+        });
+
+        //关闭弹窗
+        $('.claseDialogBtn').click(function () {
+            $('#dialogBg').fadeOut(300, function () {
+                $('#dialog').addClass('bounceOutUp').fadeOut();
+            });
+        });
+
+
+    });
+</script>
+
+<script type="text/javascript">
+    //验证姓名
+    function checkna() {
+         var name="customer.customer_name";
+        na = form1.name.value;
+        if (na.length < 1 || na.length > 6) {
+            customer_name.innerHTML = '<font class="tips_false">长度是1~6个字符</font>';
+        } else {
+            customer_name.innerHTML = '<font class="tips_true">输入正确</font>';
+        }
+    }
+
+    //验证手机号码
+    function checkpsd1() {
+        var phone="customer.customer_phone";
+        na = form1.phone.value;
+        if (na.length < 11 || na.length > 11) {
+            customer_phone.innerHTML = '<font class="tips_false">必须是11位的数字</font>';
+        } else {
+            customer_phone.innerHTML = '<font class="tips_true">输入正确</font>';
+        }
+    }
+
+    //验证身份证号码
+    function checkpsd2() {
+        var card_id="customer.customer_card_id";
+        na = form1.card_id.value;
+        if (na.length < 18 || na.length > 18) {
+            customer_card_id.innerHTML = '<font class="tips_false">必须是18位的数字</font>';
+        } else {
+            customer_card_id.innerHTML = '<font class="tips_true">输入正确</font>';
+        }
+    }
+
+    //验证籍贯
+    function checkpsd3() {
+        var address="customer.customer_address";
+        na = form1.address.value;
+        if (na.length < 4 || na.length > 4) {
+            customer_address.innerHTML = '<font class="tips_false">必须是4个字符的地址</font>';
+        } else {
+            customer_address.innerHTML = '<font class="tips_true">输入正确</font>';
+        }
+    }
+</script>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+</script>
+</html>

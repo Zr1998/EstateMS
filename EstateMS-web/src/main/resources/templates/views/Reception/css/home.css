@@ -1,0 +1,310 @@
+body {
+    background: #f5f5f5;
+}
+
+.fl {
+    float: left;
+}
+
+
+/*搜索*/
+.home {
+    width: 100%;
+    margin: 200px auto;
+}
+
+.home h1 {
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+}
+
+.home h6 {
+    text-align: center;
+    font-size: 25px;
+    margin-top: 20px;
+    color: white;
+}
+
+.search {
+    margin-top: 20px;
+}
+
+.home {
+    width: 480px;
+    height: 200px;
+    position: absolute;
+    top: 50px;
+    left: 450px;
+    z-index: 2;
+}
+/*搜索图标*/
+.sear i {
+    position: absolute;
+    left: 440px;
+    top: 140px;
+    font-size: 20px;
+    color: #8D8D8D;
+}
+/*搜索end*/
+/*导航css*/
+.nav-wrap {
+    width: 100%;
+    height: 80px;
+    background: white;
+}
+.nav {
+    width: 100%;
+    height: 40px;
+}
+.nav li {
+    list-style: none;
+    float: left;
+    height: 80px;
+    line-height: 80px;
+}
+.nav li a {
+    padding: 0 20px;
+
+}
+.nav li a:hover {
+    background-color: white;
+    display: inline-block;
+    color: #FFC001;
+}
+
+/*导航css end*/
+
+/*轮播图片大小*/
+.layui-carousel img {
+    width: 100%;
+    height: 540px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+
+/*购房流程*/
+.circuit {
+    width: 100%;
+    height: 400px;
+    padding-left: 20px;
+
+}
+
+.process {
+    width: 150px;
+    height: 100px;
+    margin: 50px;
+}
+
+.process img {
+    margin-left: 20px;
+}
+
+.text span {
+    font-size: 22px;
+    line-height: 39.6px;
+    text-align: center;
+
+}
+
+.text span i span {
+    font-size: 40px;
+}
+
+.text span i span font {
+    color: #4ab344;
+}
+
+/*购房流程end*/
+
+/*广告图*/
+.advertising {
+    width: 100%;
+    height: 377px;
+    background: url("../../../img/ad/ad.png") no-repeat;
+    overflow: hidden
+}
+
+.ad {
+    width: 900px;
+    height: 60px;
+    margin: 100px auto;
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+    line-height: 50px;
+    z-index: 1;
+
+}
+
+.ad h1 {
+    font-size: 50px;
+    color: white;
+}
+
+.ad h2 {
+    font-size: 24px;
+    color: white;
+    line-height: 46px;
+}
+
+/*广告图end*/
+
+/*精装房css*/
+.hardcover-hours {
+    width: 100%;
+    height: 980px;
+
+}
+
+.title {
+    font-size: 18px;
+    width: 400px;
+    height: 80px;
+    line-height: 80px;
+    padding-left: 30px;
+    background-color: white;
+}
+
+.title h1 {
+    font-size: 28px;
+    line-height: 80px;
+}
+
+.fr {
+
+    float: right;
+}
+
+span a {
+    color: white;
+
+}
+
+.hardcover {
+    width: 1170px;
+    padding: 15px;
+    margin-left: 90px;
+    margin-bottom: 15px;
+    background-color: white;
+    margin-top: 20px;
+}
+
+.text {
+    width: 770px;
+    height: 200px;
+    padding: 0 15px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10;
+    overflow: hidden;
+}
+
+.text p {
+    padding-bottom: 10px;
+}
+
+.fl {
+    float: left;
+}
+
+.square {
+    width: 150px;
+    height: 100px;
+    margin-top: 80px;
+}
+
+.square p span {
+    font-size: 24px;
+    color: red;
+    font-weight: bold;
+
+}
+
+.p1 {
+    font-size: 20px;
+    margin-top: 0px;
+}
+
+.news-img img {
+    width: 200px;
+    height: 200px;
+}
+
+.p1 span {
+    font-weight: 700;
+    color: #0066FF;
+}
+
+.p2 {
+    font-size: 18px;
+    font-weight: 400;
+
+}
+
+.p3 span {
+    font-size: 17px;
+    color: #797979;
+}
+
+.p4 span {
+    font-size: 14px;
+}
+
+.p4 span i {
+    font-style: normal;
+}
+
+/*精装房css end*/
+
+/*底部css*/
+.footer {
+    width: 100%;
+    height: 300px;
+    background: #333333;
+    overflow: hidden;
+}
+
+.foot {
+    width: 300px;
+    height: 80px;
+    margin-top: 100px;
+    margin-left: 30px;
+}
+
+.foot-text p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: white;
+}
+
+.copyright {
+    width: 400px;
+    height: 50px;
+    margin: 250px auto;
+    color: white;
+    text-align: center;
+}
+
+/*底部css end*/
+
+.layui-carousel-ind ul {
+    position: relative;
+    z-index: 10;
+}
+
+.layui-carousel-arrow {
+    z-index: 10;
+}
+
+.cover {
+    width: 100%;
+    height: 540px;
+    position: absolute;
+    top: 80px;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}

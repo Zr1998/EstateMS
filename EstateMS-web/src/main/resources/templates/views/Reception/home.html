@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="icon" type="imgae/x-icon" href="../../img/hours.ico"/>
+    <script src="../../base/js/jquery-3.3.1.min.js"></script>
+    <script src="../../base/plugins/layui/layui.js"></script>
+    <script src="../../base/js/requestUtil.js"></script>
+    <script src="../../base/js/global.js"></script>
+    <script src="../../base/js/baseUtil.js"></script>
+    <script src="js/home.js"></script>
+    <link rel="stylesheet" href="../../base/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../base/plugins/font-awesome-4.7.0/css/font-awesome.css"/>
+    <style>
+        #session_user_div{
+            float: right;
+             padding: 0 20px;
+         }
+        span.layui-nav-bar{
+            height: 0px;
+            top: 80px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="title fl">
+    <h1><img src="../../img/logo.png" height="52" width="67"/>房产销售管理系统</h1>
+</div>
+<div class="nav-wrap">
+    <ul class="nav ">
+        <li><a href="home.html">首页</a></li>
+        <li><a href="#">好房推荐</a></li>
+        <li><a href="#">最新资讯</a></li>
+        <li><a href="#featuredProperties">特色楼盘</a></li>
+        <li><a href="#hardcoverRoom">精装房</a></li>
+        <li><a href="#purchaseProcess">购房流程</a></li>
+        <div class="nice fr" id="login_div">
+            <li><a href="../../login.html"><i class="fa fa-user"></i>登录</a>|</li>
+            <li><a href="../../registered.html"><i class="fa fa-sign-in"></i>注册</a></li>
+        </div>
+        <div id="session_user_div" class="hidden layui-nav" style="background-color: white;">
+            <li class="layui-nav-item" style="line-height: 80px;">
+                <img  id="session_user_url" src="//t.cn/RCzsdCq" class="layui-nav-img">
+                <font style="color: black">欢迎您，</font>
+                <lable  id="session_user_name" style="color:black">张三</lable>
+                <font style="color: black">！</font>
+                <dl class="layui-nav-child" id="navTopGroup">
+                    <dd><a href="javascript:;"  id="btnUpdate"><i class="fa fa-address-card-o"></i>我的信息</a></dd>
+                    <dd><a href="javascript:;" id="btnEdit"><i class="fa fa-edit"></i>修改密码</a></dd>
+                    <dd><a href="javascript:;" id="btnLoginOut"><i class="fa fa-undo"></i>安全退出</a></dd>
+                </dl>
+            </li>
+        </div>
+    </ul>
+</div>
+<div class="header">
+    <div class="home">
+        <h1>给你一个温馨的家</h1>
+        <h6>——— 是我们一直在做的事情——— </h6>
+        <form class="sear" id="formSearch">
+            <input type="text" name="e.estate_structure" class="layui-input search" placeholder="请搜索你要的内容"/><i class="fa fa-search" id="btnSearch"></i>
+            <span><a href="">您想要的格局我都有</a></span>
+
+        </form>
+    </div>
+</div>
+<div class="cover"></div>
+<!--轮播图-->
+<div class="layui-carousel" id="test1">
+    <div carousel-item>
+        <div><img src="../../img/carouselMap/1.jpg"></div>
+        <div><img src="../../img/carouselMap/2.jpg"></div>
+        <div><img src="../../img/carouselMap/3.jpg"></div>
+        <div><img src="../../img/carouselMap/4.jpg"></div>
+        <div><img src="../../img/carouselMap/5.jpg"></div>
+    </div>
+</div>
+<!--轮播图end-->
+
+
+<!--特色楼盘-->
+<a name="featuredProperties"></a>
+<section id="home-property-listing">
+    <header class="section-header home-section-header text-center">
+        <div class="container">
+            <h2 class="wow slideInRight">特色楼盘</h2>
+            <p class="wow slideInLeft">好房源那么多，我们为你精心挑选，包您喜欢，包您满意</p>
+        </div>
+    </header>
+    <div class="container">
+        <style>
+            .feature-image img:hover {
+                transform: scale(1.02);
+                cursor: pointer;
+                transition: all linear .2s;
+            }
+        </style>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 layout-item-wrap">
+                <article class="property layout-item clearfix">
+                    <figure class="feature-image">
+                        <a class="clearfix " href="detailsPage.html">
+                            <img src="../../img/property/1.jpg" alt="Property Image" id="estate_photo"></a>
+                        <span class="btn btn-warning btn-sale">在售</span>
+                    </figure>
+                    <div class="property-contents clearfix">
+                        <header class="property-header clearfix">
+                            <div class="pull-left">
+                                <h6 class="entry-title"><a href="detailsPage.html">嘉兴智慧产业创新园</a></h6>
+                                <span class="property-location"><i class="fa fa-map-marker"></i> 浙江嘉兴</span>
+                            </div>
+                            <button class="btn btn-default btn-price pull-right "><strong>￥258000</strong></button>
+                        </header>
+                        <div class="property-meta clearfix">
+                            <span><i class="fa fa-arrows-alt"></i>140/m²</span>
+                            <span><i class="fa fa-bed"></i>3间卧室</span>
+                            <span><i class="fa fa-bathtub"></i> 1间卫浴</span>
+                            <span><i class="fa fa-shopping-basket"></i>1间厨房</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-lg-4 col-sm-6 layout-item-wrap">
+                <article class="property layout-item clearfix">
+                    <figure class="feature-image">
+                        <a class="clearfix " href="detailsPage.html">
+                            <img src="../../img/property/2.jpg" alt="Property Image"></a>
+                        <span class="btn btn-warning btn-sale">在售</span>
+                    </figure>
+                    <div class="property-contents clearfix">
+                        <header class="property-header clearfix">
+                            <div class="pull-left">
+                                <h6 class="entry-title"><a href="detailsPage.html">嘉兴智慧产业创新园</a></h6>
+                                <span class="property-location"><i class="fa fa-map-marker"></i> 浙江嘉兴</span>
+                            </div>
+                            <button class="btn btn-default btn-price pull-right "><strong>￥258000</strong></button>
+                        </header>
+                        <div class="property-meta clearfix">
+                            <span><i class="fa fa-arrows-alt"></i>140/m²</span>
+                            <span><i class="fa fa-bed"></i>3间卧室</span>
+                            <span><i class="fa fa-bathtub"></i> 1间卫浴</span>
+                            <span><i class="fa fa-shopping-basket"></i>1间厨房</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-lg-4 col-sm-6 layout-item-wrap">
+                <article class="property layout-item clearfix">
+                    <figure class="feature-image">
+                        <a class="clearfix " href="detailsPage.html">
+                            <img src="../../img/property/3.jpg" alt="Property Image"></a>
+                        <span class="btn btn-warning btn-sale">在售</span>
+                    </figure>
+                    <div class="property-contents clearfix">
+                        <header class="property-header clearfix">
+                            <div class="pull-left">
+                                <h6 class="entry-title"><a href="detailsPage.html">嘉兴智慧产业创新园</a></h6>
+                                <span class="property-location"><i class="fa fa-map-marker"></i> 浙江嘉兴</span>
+                            </div>
+                            <button class="btn btn-default btn-price pull-right "><strong>￥258000</strong></button>
+                        </header>
+                        <div class="property-meta clearfix">
+                            <span><i class="fa fa-arrows-alt"></i>140/m²</span>
+                            <span><i class="fa fa-bed"></i>3间卧室</span>
+                            <span><i class="fa fa-bathtub"></i> 1间卫浴</span>
+                            <span><i class="fa fa-shopping-basket"></i>1间厨房</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-lg-4 col-sm-6 layout-item-wrap">
+                <article class="property layout-item clearfix">
+                    <figure class="feature-image">
+                        <a class="clearfix " href="detailsPage.html">
+                            <img src="../../img/property/4.jpg" alt="Property Image"></a>
+                        <span class="btn btn-warning btn-sale">在售</span>
+                    </figure>
+                    <div class="property-contents clearfix">
+                        <header class="property-header clearfix">
+                            <div class="pull-left">
+                                <h6 class="entry-title"><a href="detailsPage.html">嘉兴智慧产业创新园</a></h6>
+                                <span class="property-location"><i class="fa fa-map-marker"></i> 浙江嘉兴</span>
+                            </div>
+                            <button class="btn btn-default btn-price pull-right "><strong>￥258000</strong></button>
+                        </header>
+                        <div class="property-meta clearfix">
+                            <span><i class="fa fa-arrows-alt"></i>140/m²</span>
+                            <span><i class="fa fa-bed"></i>3间卧室</span>
+                            <span><i class="fa fa-bathtub"></i> 1间卫浴</span>
+                            <span><i class="fa fa-shopping-basket"></i>1间厨房</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-lg-4 col-sm-6 layout-item-wrap">
+                <article class="property layout-item clearfix">
+                    <figure class="feature-image">
+                        <a class="clearfix " href="detailsPage.html">
+                            <img src="../../img/property/5.jpg" alt="Property Image"></a>
+                        <span class="btn btn-warning btn-sale">在售</span>
+                    </figure>
+                    <div class="property-contents clearfix">
+                        <header class="property-header clearfix">
+                            <div class="pull-left">
+                                <h6 class="entry-title"><a href="detailsPage.html">嘉兴智慧产业创新园</a></h6>
+                                <span class="property-location"><i class="fa fa-map-marker"></i> 浙江嘉兴</span>
+                            </div>
+                            <button class="btn btn-default btn-price pull-right "><strong>￥258000</strong></button>
+                        </header>
+                        <div class="property-meta clearfix">
+                            <span><i class="fa fa-arrows-alt"></i>140/m²</span>
+                            <span><i class="fa fa-bed"></i>3间卧室</span>
+                            <span><i class="fa fa-bathtub"></i> 1间卫浴</span>
+                            <span><i class="fa fa-shopping-basket"></i>1间厨房</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-lg-4 col-sm-6 layout-item-wrap">
+                <article class="property layout-item clearfix">
+                    <figure class="feature-image">
+                        <a class="clearfix " href="detailsPage.html">
+                            <img src="../../img/property/6.jpg" alt="Property Image"></a>
+                        <span class="btn btn-warning btn-sale">在售</span>
+                    </figure>
+                    <div class="property-contents clearfix">
+                        <header class="property-header clearfix">
+                            <div class="pull-left">
+                                <h6 class="entry-title"><a href="detailsPage.html">嘉兴智慧产业创新园</a></h6>
+                                <span class="property-location"><i class="fa fa-map-marker"></i> 浙江嘉兴</span>
+                            </div>
+                            <button class="btn btn-default btn-price pull-right "><strong>￥258000</strong></button>
+                        </header>
+                        <div class="property-meta clearfix">
+                            <span><i class="fa fa-arrows-alt"></i>140/m²</span>
+                            <span><i class="fa fa-bed"></i>3间卧室</span>
+                            <span><i class="fa fa-bathtub"></i> 1间卫浴</span>
+                            <span><i class="fa fa-shopping-basket"></i>1间厨房</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <ul id="pagination" class="text-center clearfix">
+            <li class="disabled"><a href="#"><font style="vertical-align: inherit;">上一页</font></a></li>
+            <li><a href="#"><font style="vertical-align: inherit;">1</font></a></li>
+            <li><a href="#"><font style="vertical-align: inherit;">2</font></a></li>
+            <li><a href="#"><font style="vertical-align: inherit;">3</font></a></li>
+            <li><a href="#"><font style="vertical-align: inherit;">下一个</font></a></li>
+        </ul>
+    </div>
+</section>
+<!--特色楼盘end-->
+
+<!--精装房-->
+<!--<a name="hardcoverRoom"></a>-->
+<!--<div class="hardcover-hours">-->
+    <!--<header class="section-header home-section-header text-center">-->
+        <!--<div class="container">-->
+            <!--<h2 class="wow slideInRight">精装房</h2>-->
+            <!--<p class="wow slideInLeft">好房源那么多，我们为你精心挑选，包您喜欢，包您满意</p>-->
+        <!--</div>-->
+    <!--</header>-->
+    <!--<a href="detailsPage.html">-->
+        <!--<div class="hardcover fl">-->
+            <!--<div class="news-img fl"><img src="../../img/property/7.jpg" alt=""></div>-->
+            <!--<div class="text fl">-->
+                <!--<p class="p1"><span>锦绣明居高层两室一厅&nbsp; 家电齐全&nbsp; 拎包入住</span></p>-->
+                <!--<p class="p2"><span>锦绣明居B座&nbsp;&nbsp; 2室2厅&nbsp;&nbsp; 80平米</span></p>-->
+                <!--<p class="p3"><span>天河租房&nbsp; /&nbsp; 高楼层（共26层）</span></p>-->
+                <!--<p class="p4"><span><i style="color: #01AAED;">随时看房</i>&nbsp;&nbsp;-->
+            <!--<i style="color: #eb7350;">地铁房</i> &nbsp;&nbsp;<i style="color: #eb7350;">精装房</i></span></p>-->
+            <!--</div>-->
+            <!--<div class="square fr"><p><span>50000元/m²</span></p></div>-->
+        <!--</div>-->
+    <!--</a>-->
+    <!--<a href="detailsPage.html">-->
+    <!--<div class="hardcover fl">-->
+        <!--<div class="news-img fl"><img src="../../img/property/8.jpg" alt=""></div>-->
+        <!--<div class="text fl">-->
+            <!--<p class="p1"><span>锦绣明居高层两室一厅&nbsp; 家电齐全&nbsp; 拎包入住</span></p>-->
+            <!--<p class="p2"><span>锦绣明居B座&nbsp;&nbsp; 2室2厅&nbsp;&nbsp; 80平米</span></p>-->
+            <!--<p class="p3"><span>天河租房&nbsp; /&nbsp; 高楼层（共26层）</span></p>-->
+            <!--<p class="p4"><span><i style="color: #01AAED;">随时看房</i>&nbsp;&nbsp;-->
+            <!--<i style="color: #eb7350;">地铁房</i> &nbsp;&nbsp;<i style="color: #eb7350;">精装房</i></span></p>-->
+        <!--</div>-->
+        <!--<div class="square fr"><p><span>50000元/m²</span></p></div>-->
+    <!--</div>-->
+    <!--</a>-->
+    <!--<a href="detailsPage.html">-->
+    <!--<div class="hardcover fl">-->
+        <!--<div class="news-img fl"><img src="../../img/property/9.jpg" alt=""></div>-->
+        <!--<div class="text fl">-->
+            <!--<p class="p1"><span>锦绣明居高层两室一厅&nbsp; 家电齐全&nbsp; 拎包入住</span></p>-->
+            <!--<p class="p2"><span>锦绣明居B座&nbsp;&nbsp; 2室2厅&nbsp;&nbsp; 80平米</span></p>-->
+            <!--<p class="p3"><span>天河租房&nbsp; /&nbsp; 高楼层（共26层）</span></p>-->
+            <!--<p class="p4"><span><i style="color: #01AAED;">随时看房</i>&nbsp;&nbsp;-->
+            <!--<i style="color: #eb7350;">地铁房</i> &nbsp;&nbsp;<i style="color: #eb7350;">精装房</i></span></p>-->
+        <!--</div>-->
+        <!--<div class="square fr"><p><span>50000元/m²</span></p></div>-->
+    <!--</div>-->
+    <!--</a>-->
+<!--</div>-->
+
+<!--精装房end-->
+
+<!--购房流程-->
+<a name="purchaseProcess"></a>
+<header class="section-header home-section-header text-center">
+    <div class="container">
+        <h2 class="wow slideInRight">购房流程</h2>
+        <p class="wow slideInLeft">好房源那么多，我们为你精心挑选，包您喜欢，包您满意</p>
+    </div>
+</header>
+
+<div class="circuit">
+    <div class="process fl">
+        <div class="img"><img src="../../img/ad/Process1.png"></div>
+        <div class="text">
+            <span><b><i><span><font face="Arial">1</font></span></i></b>&nbsp; 挑选楼盘</span>
+        </div>
+    </div>
+    <div class="process fl">
+        <div class="img">
+            <img src="../../img/ad/Process2.png">
+        </div>
+        <div class="text">
+            <span><b><i><span><font face="Arial">2</font></span></i></b>&nbsp; 合同签订</span>
+        </div>
+    </div>
+    <div class="process fl">
+        <div class="img">
+            <img src="../../img/ad/Process3.png">
+        </div>
+        <div class="text">
+            <span><b><i><span><font face="Arial">3</font></span></i></b>&nbsp; 接送看房</span>
+        </div>
+    </div>
+    <div class="process fl">
+        <div class="img">
+            <img src="../../img/ad/Process4.png">
+        </div>
+        <div class="text">
+            <span><b><i><span><font face="Arial">4</font></span></i></b>&nbsp; 购房成功</span>
+        </div>
+    </div>
+    <div class="process fl">
+        <div class="img">
+            <img src="../../img/ad/Process5.png">
+        </div>
+        <div class="text">
+            <span><b><i><span><font face="Arial">5</font></span></i></b>&nbsp; 搬家入住</span>
+        </div>
+    </div>
+</div>
+<!--购房流程end-->
+
+
+<!--广告图-->
+<div class="advertising">
+    <div class="ad">
+        <h1>我们真心诚意让您拥有一个温馨的家</h1>
+        <h2>OUR SINCERE INTENTION TO LET YOU HAVE A WARM HOME</h2>
+        <h2> 真实存在，真实在售，真实价格，真实图片</h2>
+    </div>
+</div>
+<!--广告图end-->
+
+<!--底部-->
+<div class="footer">
+    <div class="foot fl">
+        <div class="foot-img fl">
+            <img src="../../img/ad/time1.png" alt="">
+        </div>
+        <div class="foot-text fl"><p>工作时间</p>
+            <p>9:00-16:00</p></div>
+    </div>
+    <div class="foot fl">
+        <div class="foot-img fl">
+            <img src="../../img/ad/time2.png" alt="">
+        </div>
+        <div class="foot-text fl">
+            <p>预约看房</p>
+            <p>预约成功后线下看房选房</p>
+        </div>
+    </div>
+    <div class="foot fl">
+        <div class="foot-img fl">
+            <img src="../../img/ad/time3.png" alt="">
+        </div>
+        <div class="foot-text fl">
+            <p>联系我们</p>
+            <p>1001001</p>
+        </div>
+    </div>
+    <div class="foot fl">
+        <div class="foot-img fl">
+            <img src="../../img/ad/time3.png" alt="">
+        </div>
+        <div class="foot-text fl">
+            <p>欢迎咨询</p>
+            <p>有任何问题请联系我们</p>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>©2018 可乐可乐—房地产版权所有</p>
+    </div>
+</div>
+<!--底部end-->
+</body>
+<script>
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+    //建造实例
+      carousel.render({
+        elem: '#test1'
+        , width: '100%' //设置容器宽度
+    , arrow: 'always' //始终显示箭头
+    , height: '540px'
+    //,anim: 'updown' //切换动画方式
+    });
+    });
+
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+      layui.use('element', function () {
+        var element = layui.element;
+    });
+</script>
+</html>
+
